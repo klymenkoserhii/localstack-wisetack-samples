@@ -71,6 +71,7 @@ resource "aws_api_gateway_rest_api" "api" {
     api-role-arn = aws_iam_role.api-role.arn
     lambda-arn-LambdaRequestHandler = aws_lambda_function.lambda-function-LambdaRequestHandler.invoke_arn
     request-template = file("./request-template.vm")
+    response-template = file("./response-template.vm")
   })
 }
 

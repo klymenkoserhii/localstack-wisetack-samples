@@ -519,7 +519,7 @@
                 "method.response.header.Referrer-Policy": "'same-origin'"
               },
               "responseTemplates": {
-                "application/json": "#set($responseBody = $input.json('$.responseBody'))#set($errorMessage = $input.path('$.errorMessage'))#set($errorType = $input.path('$.errorType'))#set($headers = $input.path('$.headers'))#set($stage = $context.stage)#if(!$context.responseOverride && $stage == 'local')#set($context.responseOverride = {\"header\": $headers})#else#set($context.responseOverride.header = $headers)#end#set($context.responseOverride.status = $input.path('$.statusCode'))#if($errorMessage && !$errorMessage.empty)  {\n  #if($responseBody && !$responseBody.empty && $responseBody != '\"\"' && $responseBody != '{}')\n    \"response\": $responseBody,\n  #end\n  #if($errorType && !$errorType.empty)\n    \"type\": \"$errorType\",\n  #end\n  #if($stage == 'local')\n    \"input\": $input.json('$'),\n    \"context\": \"$context\",\n  #end\n  #if($errorMessage.startsWith('{'))\n    \"message\": $errorMessage\n  #else\n      \"message\": \"$errorMessage\"\n  #end\n  }\n#else$responseBody#end"
+                "application/json": "${response-template}"
               }
             },
             ".*httpStatus\\\":400.*": {
@@ -1180,7 +1180,7 @@
                 "method.response.header.Referrer-Policy": "'same-origin'"
               },
               "responseTemplates": {
-                "application/json": "#set($responseBody = $input.json('$.responseBody'))#set($errorMessage = $input.path('$.errorMessage'))#set($errorType = $input.path('$.errorType'))#set($headers = $input.path('$.headers'))#set($stage = $context.stage)#if(!$context.responseOverride && $stage == 'local')#set($context.responseOverride = {\"header\": $headers})#else#set($context.responseOverride.header = $headers)#end#set($context.responseOverride.status = $input.path('$.statusCode'))#if($errorMessage && !$errorMessage.empty)  {\n  #if($responseBody && !$responseBody.empty && $responseBody != '\"\"' && $responseBody != '{}')\n    \"response\": $responseBody,\n  #end\n  #if($errorType && !$errorType.empty)\n    \"type\": \"$errorType\",\n  #end\n  #if($stage == 'local')\n    \"input\": $input.json('$'),\n    \"context\": \"$context\",\n  #end\n  #if($errorMessage.startsWith('{'))\n    \"message\": $errorMessage\n  #else\n      \"message\": \"$errorMessage\"\n  #end\n  }\n#else$responseBody#end"
+                "application/json": "${response-template}"
               }
             },
             ".*httpStatus\\\":400.*": {
