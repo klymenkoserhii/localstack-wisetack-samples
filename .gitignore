@@ -20,3 +20,4 @@ volume/
 .terraform/
 .terraform.lock.hcl
 specs/
+*.tfstate

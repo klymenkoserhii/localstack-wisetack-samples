@@ -7,7 +7,7 @@ test -f response.json && rm response.json
 start=$(date +%s)
 
 awslocal lambda invoke --function-name LambdaRequestHandler \
-  --payload file://invoke-payload.json \
+  --payload file://invoke-lambda-payload.json \
   response.json
 
 test -f response.json && echo $(<response.json) | jq

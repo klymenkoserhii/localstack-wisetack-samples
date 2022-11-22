@@ -1,7 +1,6 @@
 data "aws_caller_identity" "current-identity" {}
 
 locals {
-  alias_name = "LIVE"
   lambda-arn-prefix = "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:${data.aws_caller_identity.current-identity.account_id}:function:"
   stage-name = "local"
   api_gateway_log_format = jsonencode({
@@ -23,12 +22,12 @@ locals {
 }
 
 resource "aws_lambda_function" "lambda-function-LambdaRequestHandler" {
-  filename = "./target/localstack-wisetack-samples-1.0.jar"
+  filename = "../../target/localstack-wisetack-samples-1.0.jar"
   function_name = "LambdaRequestHandler"
   runtime = "java11"
   role = aws_iam_role.lambda-role.arn
   timeout = "900"
-  source_code_hash = filebase64sha256("./target/localstack-wisetack-samples-1.0.jar")
+  source_code_hash = filebase64sha256("../../target/localstack-wisetack-samples-1.0.jar")
   publish = true
   handler = "com.wisetack.samples.LambdaRequestHandler::handleRequest"
   architectures = ["arm64"]
@@ -141,7 +140,7 @@ resource "aws_iam_role_policy" "api-policy" {
 
 resource "aws_api_gateway_rest_api" "api" {
   name = "LocalStack Wisetack API"
-  body = templatefile("./specs/api.json", {
+  body = templatefile("../../specs/api.json", {
     api-role-arn = aws_iam_role.api-role.arn
     lambda-arn-LambdaRequestHandler = aws_lambda_function.lambda-function-LambdaRequestHandler.invoke_arn
   })
