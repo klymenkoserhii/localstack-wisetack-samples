@@ -21,3 +21,5 @@ volume/
 .terraform.lock.hcl
 specs/
 *.tfstate
+*.tfstate.backup
+**/response.json

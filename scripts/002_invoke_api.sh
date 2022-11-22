@@ -7,7 +7,7 @@ source ./000_get_api_id.sh
 start=`date +%s`
 
 data=`curl -v -H "Content-Type: application/json" -H "User-Agent: unirest-java/curl" \
--d "{\"test\": \"test\"}" -X POST ${API_URL}/merchants/abcd-1234/transactions`
+-d "{\"test\": \"test\"}" -X POST ${API_URL}/merchants/abcd-1234/transactions?status=PENDING\&limit=100`
 
 echo ${data} | jq
 
