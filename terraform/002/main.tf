@@ -90,8 +90,8 @@ resource "aws_api_gateway_rest_api" "api-test" {
   body = templatefile("./api.json", {
     api-role-arn = aws_iam_role.api-test-role.arn
     lambda-arn-LambdaRequestHandler = aws_lambda_function.lambda-test-function-LambdaRequestHandler.invoke_arn
-    request-template = replace(replace(file(var.use_localstack ? "./request-template-localstack.vm" : "./request-template-aws.vm"), "\n", ""), "\"", "\\\"")
-    response-template = replace(replace(file(var.use_localstack ? "./response-template-localstack.vm" : "./response-template-aws.vm"), "\n", ""), "\"", "\\\"")
+    request-template = replace(replace(file(var.use_localstack ? "./request-template-local.vm" : "./request-template-aws.vm"), "\n", ""), "\"", "\\\"")
+    response-template = replace(replace(file(var.use_localstack ? "./response-template-local.vm" : "./response-template-aws.vm"), "\n", ""), "\"", "\\\"")
   })
 }
 

@@ -1,0 +1,64 @@
+{
+  "headers": {
+    "X-Wisetack-Token": "Test-Wisetack-Token"
+  },
+  "responseBody": {
+    "context": {
+      "awsRequestId": "2e05e5fb-0e99-19d7-ca20-59e459045b1c",
+      "functionName": "LambdaRequestHandler",
+      "functionVersion": "$LATEST",
+      "invokedFunctionArn": "arn:aws:lambda:us-east-1:000000000000:function:LambdaRequestHandler",
+      "logGroupName": "/aws/lambda/LambdaRequestHandler",
+      "logStreamName": "2022/11/24/[$LATEST]34c4c245ec9aefdfa6e762478f5c00b9",
+      "logger": {},
+      "memoryLimitInMB": 1536,
+      "remainingTimeInMillis": 898460
+    },
+    "env": {
+      "AWS_ACCESS_KEY": "test",
+      "AWS_ACCESS_KEY_ID": "test",
+      "AWS_DEFAULT_REGION": "us-east-1",
+      "AWS_EXECUTION_ENV": "AWS_Lambda_java11",
+      "AWS_LAMBDA_FUNCTION_INVOKED_ARN": "arn:aws:lambda:us-east-1:000000000000:function:LambdaRequestHandler",
+      "AWS_LAMBDA_FUNCTION_MEMORY_SIZE": "1536",
+      "AWS_LAMBDA_FUNCTION_NAME": "LambdaRequestHandler",
+      "AWS_LAMBDA_FUNCTION_TIMEOUT": "900",
+      "AWS_LAMBDA_FUNCTION_VERSION": "$LATEST",
+      "AWS_LAMBDA_LOG_GROUP_NAME": "/aws/lambda/LambdaRequestHandler",
+      "AWS_LAMBDA_LOG_STREAM_NAME": "2022/11/24/[$LATEST]34c4c245ec9aefdfa6e762478f5c00b9",
+      "AWS_LAMBDA_RUNTIME_API": "127.0.0.1:9001",
+      "AWS_REGION": "us-east-1",
+      "AWS_SECRET_ACCESS_KEY": "test",
+      "AWS_SECRET_KEY": "test",
+      "AWS_XRAY_CONTEXT_MISSING": "LOG_ERROR",
+      "AWS_XRAY_DAEMON_ADDRESS": "169.254.79.2:2000",
+      "DOCKER_LAMBDA_USE_STDIN": "1",
+      "EDGE_PORT": "4566",
+      "HOME": "/home/sbx_user1051",
+      "HOSTNAME": "50d5019ff80a",
+      "LAMBDA_RUNTIME_DIR": "/var/runtime",
+      "LAMBDA_TASK_ROOT": "/var/task",
+      "LANG": "en_US.UTF-8",
+      "LD_LIBRARY_PATH": "/var/lang/lib:/lib64:/usr/lib64:/var/runtime:/var/runtime/lib:/var/task:/var/task/lib:/opt/lib",
+      "LOCALSTACK_HOSTNAME": "172.18.0.2",
+      "PATH": "/var/lang/bin:/usr/local/bin:/usr/bin/:/bin:/opt/bin",
+      "TZ": ":UTC",
+      "_AWS_XRAY_DAEMON_ADDRESS": "169.254.79.2",
+      "_AWS_XRAY_DAEMON_PORT": "2000",
+      "_HANDLER": "com.wisetack.samples.LambdaRequestHandler::handleRequest",
+      "_LAMBDA_CONSOLE_SOCKET": "16",
+      "_LAMBDA_CONTROL_SOCKET": "14",
+      "_LAMBDA_LOG_FD": "9",
+      "_LAMBDA_RUNTIME_LOAD_TIME": "1530232235231",
+      "_LAMBDA_SB_ID": "7",
+      "_LAMBDA_SHARED_MEM_FD": "11",
+      "_X_AMZN_TRACE_ID": "Root=1-dc99d00f-c079a84d433534434534ef0d;Parent=91ed514f1e5c03b2;Sampled=1"
+    },
+    "event": {
+      "header": {
+        "param": "value"
+      }
+    }
+  },
+  "statusCode": 202
+}

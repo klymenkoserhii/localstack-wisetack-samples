@@ -1,0 +1,23 @@
+{
+  "mapping_template": true,
+  "response": [],
+  "type": "java.lang.RuntimeException",
+  "input": {
+    "errorMessage": "{\"httpStatus\":400, \"errorMessage\":\"Test Bad request\"}",
+    "errorType": "java.lang.RuntimeException",
+    "stackTrace": [
+      "com.wisetack.samples.LambdaRequestHandler.throwApiException(LambdaRequestHandler.java:56)",
+      "com.wisetack.samples.LambdaRequestHandler.testException(LambdaRequestHandler.java:50)",
+      "com.wisetack.samples.LambdaRequestHandler.handleRequest(LambdaRequestHandler.java:18)",
+      "java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)",
+      "java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)",
+      "java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)",
+      "java.base/java.lang.reflect.Method.invoke(Unknown Source)"
+    ]
+  },
+  "context": "{'accountId': '000000000000', 'apiId': '5ygtxmzh6m', 'resourcePath': '/products/{productId}/items', 'domainPrefix': 'localhost', 'domainName': 'localhost', 'resourceId': '5px0la6qc8', 'requestId': 'f1b9189b-a0e2-4801-b7ac-0a1f4fb9d026', 'identity': {'accountId': '000000000000', 'sourceIp': '172.18.0.1', 'userAgent': 'unirest-java/curl'}, 'httpMethod': 'POST', 'protocol': 'HTTP/1.1', 'requestTime': '24/Nov/2022:18:25:46 +0000', 'requestTimeEpoch': 1669314346301, 'authorizer': {}, 'path': '/local/products/abcd-1234/items', 'stage': 'local', 'responseOverride': {'header': [], 'status': []}}",
+  "message": {
+    "httpStatus": 400,
+    "errorMessage": "Test Bad request"
+  }
+}
