@@ -5,12 +5,28 @@
 #set($stage = $context.stage)
 #if(!$context.responseOverride && $stage == 'local')
     #set($context.responseOverride = {\"header\": $headers})
-#else#set($context.responseOverride.header = $headers)#end
+#else
+    #set($context.responseOverride.header = $headers)
+#end
 #set($context.responseOverride.status = $input.path('$.statusCode'))
 #if($errorMessage && !$errorMessage.empty)
-{#if($responseBody && !$responseBody.empty && $responseBody != '\"\"' && $responseBody != '{}')
-\"response\": $responseBody, #end
-    #if($errorType && !$errorType.empty) \"type\": \"$errorType\",#end
-    #if($stage == 'local') \"input\": $input.json('$'), \"context\": \"$context\",#end
-    #if($errorMessage.startsWith('{')) \"message\": $errorMessage
-    #else \"message\": \"$errorMessage\"#end\n  }#else$responseBody#end
+{
+    #if($responseBody && !$responseBody.empty && $responseBody != '\"\"' && $responseBody != '{}')
+    \"response\": $responseBody,
+    #end
+    #if($errorType && !$errorType.empty)
+    \"type\": \"$errorType\",
+    #end
+    #if($stage == 'local')
+    \"input\": $input.json('$'),
+    \"context\": \"$context\",
+    #end
+    #if($errorMessage.startsWith('{'))
+    \"message\": $errorMessage
+    #else
+    \"message\": \"$errorMessage\"
+    #end
+}
+#else
+    $responseBody
+#end

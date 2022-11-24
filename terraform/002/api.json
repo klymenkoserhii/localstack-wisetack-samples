@@ -1,68 +1,23 @@
 {
   "openapi" : "3.0.1",
   "info": {
-    "title" : "LocalStack Wisetack API",
+    "title" : "API Test",
     "version" : "1.0.0"
   },
 
   "paths" : {
-    "/merchants/{merchantId}/transactions": {
+    "/products/{productId}/items": {
       "parameters": [
         {
           "in": "path",
-          "name": "merchantId",
-          "description": "Unique identifier of the merchant.",
+          "name": "productId",
           "schema": {
             "type": "string"
           },
           "required": true
         }
       ],
-      "options": {
-        "summary": "CORS support",
-        "description": "Enable CORS by returning correct headers",
-        "tags": [
-          "CORS"
-        ],
-        "x-amazon-apigateway-integration": {
-          "type": "mock",
-          "requestTemplates": {
-            "application/json": "{\n  \"statusCode\" : 200\n}\n",
-            "application/csp-report": "{\n  \"statusCode\" : 200\n}\n"
-          },
-          "responses": {
-            "default": {
-              "statusCode": "200",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-IO-Blackbox'",
-                "method.response.header.Access-Control-Allow-Methods": "'GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Expose-Headers": "'X-Wisetack-Token,Cache-Control,Pragma,Expires,X-XSS-Protection,X-Content-Type-Options,Content-Type,Strict-Transport-Security,Content-Security-Policy,Referrer-Policy'",
-                "method.response.header.Cache-Control": "'no-cache,no-store,must-revalidate'",
-                "method.response.header.Pragma": "'no-cache'",
-                "method.response.header.Expires": "'-1'",
-                "method.response.header.X-XSS-Protection": "'1; mode=block'",
-                "method.response.header.X-Content-Type-Options": "'nosniff'",
-                "method.response.header.Content-Type": "'application/json; charset=utf-8'",
-                "method.response.header.Strict-Transport-Security": "'max-age=31536000; includeSubDomains; preload'",
-                "method.response.header.Content-Security-Policy": "'default-src https:'",
-                "method.response.header.Referrer-Policy": "'same-origin'"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/CORSResponse"
-          }
-        }
-      },
       "post": {
-        "summary": "Initiate a transaction",
-        "description": "Creates a Transaction object, where the consumer receives a text message with a link to their loan application. While only several parameters are required, providing more data improves the consumer experience and merchant reporting.",
-        "tags": [
-          "Transactions"
-        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -76,47 +31,6 @@
         "responses": {
           "200": {
             "description": "Ok",
-            "headers": {
-              "Access-Control-Allow-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Methods": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Origin": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Expose-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Cache-Control": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Pragma": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Expires": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-XSS-Protection": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-Content-Type-Options": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Type": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Strict-Transport-Security": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Security-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Referrer-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -137,47 +51,6 @@
           },
           "400": {
             "description": "Bad Request.",
-            "headers": {
-              "Access-Control-Allow-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Methods": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Origin": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Expose-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Cache-Control": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Pragma": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Expires": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-XSS-Protection": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-Content-Type-Options": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Type": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Strict-Transport-Security": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Security-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Referrer-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -188,47 +61,6 @@
           },
           "401": {
             "description": "Unauthorized.",
-            "headers": {
-              "Access-Control-Allow-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Methods": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Origin": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Expose-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Cache-Control": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Pragma": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Expires": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-XSS-Protection": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-Content-Type-Options": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Type": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Strict-Transport-Security": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Security-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Referrer-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -239,47 +71,6 @@
           },
           "403": {
             "description": "Forbidden.",
-            "headers": {
-              "Access-Control-Allow-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Methods": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Origin": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Expose-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Cache-Control": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Pragma": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Expires": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-XSS-Protection": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-Content-Type-Options": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Type": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Strict-Transport-Security": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Security-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Referrer-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -290,47 +81,6 @@
           },
           "404": {
             "description": "Not Found.",
-            "headers": {
-              "Access-Control-Allow-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Methods": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Origin": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Expose-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Cache-Control": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Pragma": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Expires": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-XSS-Protection": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-Content-Type-Options": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Type": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Strict-Transport-Security": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Security-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Referrer-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -341,47 +91,6 @@
           },
           "409": {
             "description": "Conflict.",
-            "headers": {
-              "Access-Control-Allow-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Methods": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Origin": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Expose-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Cache-Control": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Pragma": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Expires": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-XSS-Protection": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-Content-Type-Options": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Type": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Strict-Transport-Security": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Security-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Referrer-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -392,47 +101,6 @@
           },
           "500": {
             "description": "Internal Server Error.",
-            "headers": {
-              "Access-Control-Allow-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Methods": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Origin": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Expose-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Cache-Control": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Pragma": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Expires": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-XSS-Protection": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-Content-Type-Options": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Type": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Strict-Transport-Security": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Security-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Referrer-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -443,47 +111,6 @@
           },
           "501": {
             "description": "Not Implemented.",
-            "headers": {
-              "Access-Control-Allow-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Methods": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Origin": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Expose-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Cache-Control": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Pragma": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Expires": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-XSS-Protection": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-Content-Type-Options": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Type": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Strict-Transport-Security": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Security-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Referrer-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -503,147 +130,42 @@
           "responses": {
             "default": {
               "statusCode": "200",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-IO-Blackbox'",
-                "method.response.header.Access-Control-Allow-Methods": "'GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Expose-Headers": "'X-Wisetack-Token,Cache-Control,Pragma,Expires,X-XSS-Protection,X-Content-Type-Options,Content-Type,Strict-Transport-Security,Content-Security-Policy,Referrer-Policy'",
-                "method.response.header.Cache-Control": "'no-cache,no-store,must-revalidate'",
-                "method.response.header.Pragma": "'no-cache'",
-                "method.response.header.Expires": "'-1'",
-                "method.response.header.X-XSS-Protection": "'1; mode=block'",
-                "method.response.header.X-Content-Type-Options": "'nosniff'",
-                "method.response.header.Content-Type": "'application/json; charset=utf-8'",
-                "method.response.header.Strict-Transport-Security": "'max-age=31536000; includeSubDomains; preload'",
-                "method.response.header.Content-Security-Policy": "'default-src https:'",
-                "method.response.header.Referrer-Policy": "'same-origin'"
-              },
               "responseTemplates": {
                 "application/json": "${response-template}"
               }
             },
             ".*httpStatus\\\":400.*": {
               "statusCode": "400",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-IO-Blackbox'",
-                "method.response.header.Access-Control-Allow-Methods": "'GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Expose-Headers": "'X-Wisetack-Token,Cache-Control,Pragma,Expires,X-XSS-Protection,X-Content-Type-Options,Content-Type,Strict-Transport-Security,Content-Security-Policy,Referrer-Policy'",
-                "method.response.header.Cache-Control": "'no-cache,no-store,must-revalidate'",
-                "method.response.header.Pragma": "'no-cache'",
-                "method.response.header.Expires": "'-1'",
-                "method.response.header.X-XSS-Protection": "'1; mode=block'",
-                "method.response.header.X-Content-Type-Options": "'nosniff'",
-                "method.response.header.Content-Type": "'application/json; charset=utf-8'",
-                "method.response.header.Strict-Transport-Security": "'max-age=31536000; includeSubDomains; preload'",
-                "method.response.header.Content-Security-Policy": "'default-src https:'",
-                "method.response.header.Referrer-Policy": "'same-origin'"
-              },
               "responseTemplates": {
                 "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
               }
             },
             ".*httpStatus\\\":401.*": {
               "statusCode": "401",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-IO-Blackbox'",
-                "method.response.header.Access-Control-Allow-Methods": "'GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Expose-Headers": "'X-Wisetack-Token,Cache-Control,Pragma,Expires,X-XSS-Protection,X-Content-Type-Options,Content-Type,Strict-Transport-Security,Content-Security-Policy,Referrer-Policy'",
-                "method.response.header.Cache-Control": "'no-cache,no-store,must-revalidate'",
-                "method.response.header.Pragma": "'no-cache'",
-                "method.response.header.Expires": "'-1'",
-                "method.response.header.X-XSS-Protection": "'1; mode=block'",
-                "method.response.header.X-Content-Type-Options": "'nosniff'",
-                "method.response.header.Content-Type": "'application/json; charset=utf-8'",
-                "method.response.header.Strict-Transport-Security": "'max-age=31536000; includeSubDomains; preload'",
-                "method.response.header.Content-Security-Policy": "'default-src https:'",
-                "method.response.header.Referrer-Policy": "'same-origin'"
-              },
               "responseTemplates": {
                 "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
               }
             },
             ".*httpStatus\\\":403.*": {
               "statusCode": "403",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-IO-Blackbox'",
-                "method.response.header.Access-Control-Allow-Methods": "'GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Expose-Headers": "'X-Wisetack-Token,Cache-Control,Pragma,Expires,X-XSS-Protection,X-Content-Type-Options,Content-Type,Strict-Transport-Security,Content-Security-Policy,Referrer-Policy'",
-                "method.response.header.Cache-Control": "'no-cache,no-store,must-revalidate'",
-                "method.response.header.Pragma": "'no-cache'",
-                "method.response.header.Expires": "'-1'",
-                "method.response.header.X-XSS-Protection": "'1; mode=block'",
-                "method.response.header.X-Content-Type-Options": "'nosniff'",
-                "method.response.header.Content-Type": "'application/json; charset=utf-8'",
-                "method.response.header.Strict-Transport-Security": "'max-age=31536000; includeSubDomains; preload'",
-                "method.response.header.Content-Security-Policy": "'default-src https:'",
-                "method.response.header.Referrer-Policy": "'same-origin'"
-              },
               "responseTemplates": {
                 "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
               }
             },
             ".*httpStatus\\\":404.*": {
               "statusCode": "404",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-IO-Blackbox'",
-                "method.response.header.Access-Control-Allow-Methods": "'GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Expose-Headers": "'X-Wisetack-Token,Cache-Control,Pragma,Expires,X-XSS-Protection,X-Content-Type-Options,Content-Type,Strict-Transport-Security,Content-Security-Policy,Referrer-Policy'",
-                "method.response.header.Cache-Control": "'no-cache,no-store,must-revalidate'",
-                "method.response.header.Pragma": "'no-cache'",
-                "method.response.header.Expires": "'-1'",
-                "method.response.header.X-XSS-Protection": "'1; mode=block'",
-                "method.response.header.X-Content-Type-Options": "'nosniff'",
-                "method.response.header.Content-Type": "'application/json; charset=utf-8'",
-                "method.response.header.Strict-Transport-Security": "'max-age=31536000; includeSubDomains; preload'",
-                "method.response.header.Content-Security-Policy": "'default-src https:'",
-                "method.response.header.Referrer-Policy": "'same-origin'"
-              },
               "responseTemplates": {
                 "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
               }
             },
             ".*httpStatus\\\":409.*": {
               "statusCode": "409",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-IO-Blackbox'",
-                "method.response.header.Access-Control-Allow-Methods": "'GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Expose-Headers": "'X-Wisetack-Token,Cache-Control,Pragma,Expires,X-XSS-Protection,X-Content-Type-Options,Content-Type,Strict-Transport-Security,Content-Security-Policy,Referrer-Policy'",
-                "method.response.header.Cache-Control": "'no-cache,no-store,must-revalidate'",
-                "method.response.header.Pragma": "'no-cache'",
-                "method.response.header.Expires": "'-1'",
-                "method.response.header.X-XSS-Protection": "'1; mode=block'",
-                "method.response.header.X-Content-Type-Options": "'nosniff'",
-                "method.response.header.Content-Type": "'application/json; charset=utf-8'",
-                "method.response.header.Strict-Transport-Security": "'max-age=31536000; includeSubDomains; preload'",
-                "method.response.header.Content-Security-Policy": "'default-src https:'",
-                "method.response.header.Referrer-Policy": "'same-origin'"
-              },
               "responseTemplates": {
                 "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
               }
             },
             ".*httpStatus\\\":500.*": {
               "statusCode": "500",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-IO-Blackbox'",
-                "method.response.header.Access-Control-Allow-Methods": "'GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Expose-Headers": "'X-Wisetack-Token,Cache-Control,Pragma,Expires,X-XSS-Protection,X-Content-Type-Options,Content-Type,Strict-Transport-Security,Content-Security-Policy,Referrer-Policy'",
-                "method.response.header.Cache-Control": "'no-cache,no-store,must-revalidate'",
-                "method.response.header.Pragma": "'no-cache'",
-                "method.response.header.Expires": "'-1'",
-                "method.response.header.X-XSS-Protection": "'1; mode=block'",
-                "method.response.header.X-Content-Type-Options": "'nosniff'",
-                "method.response.header.Content-Type": "'application/json; charset=utf-8'",
-                "method.response.header.Strict-Transport-Security": "'max-age=31536000; includeSubDomains; preload'",
-                "method.response.header.Content-Security-Policy": "'default-src https:'",
-                "method.response.header.Referrer-Policy": "'same-origin'"
-              },
               "responseTemplates": {
                 "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
               }
@@ -653,16 +175,10 @@
         }
       },
       "get": {
-        "summary": "Retrieve a list of transactions for a merchant",
-        "description": "Retrieves a list of Transaction objects for a given merchant filtered by date range, status, or number of items.",
-        "tags": [
-          "Transactions"
-        ],
         "parameters": [
           {
             "in": "path",
-            "name": "merchantId",
-            "description": "Unique identifier of the merchant.",
+            "name": "productId",
             "required": true,
             "schema": {
               "type": "string"
@@ -671,7 +187,6 @@
           {
             "in": "query",
             "name": "limit",
-            "description": "Maximum number of transactions to return.",
             "schema": {
               "type": "integer"
             },
@@ -680,7 +195,6 @@
           {
             "in": "query",
             "name": "startingAfter",
-            "description": "List only transactions that were initiated after this date.",
             "schema": {
               "type": "string"
             },
@@ -689,7 +203,6 @@
           {
             "in": "query",
             "name": "endingBefore",
-            "description": "List only transactions that were initiated before this date.",
             "schema": {
               "type": "string"
             },
@@ -698,147 +211,25 @@
           {
             "in": "query",
             "name": "status",
-            "description": "List only transactions with this UI-friendly status. See the enumeration of the supported values in the \"status\" attribute in the response documentation of this endpoint.",
             "schema": {
               "type": "string"
             },
             "required": false
           }
         ],
-        "options": {
-          "summary": "CORS support",
-          "description": "Enable CORS by returning correct headers",
-          "tags": [
-            "CORS"
-          ],
-          "x-amazon-apigateway-integration": {
-            "type": "mock",
-            "requestTemplates": {
-              "application/json": "{\n  \"statusCode\" : 200\n}\n",
-              "application/csp-report": "{\n  \"statusCode\" : 200\n}\n"
-            },
-            "responses": {
-              "default": {
-                "statusCode": "200",
-                "responseParameters": {
-                  "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-IO-Blackbox'",
-                  "method.response.header.Access-Control-Allow-Methods": "'GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH'",
-                  "method.response.header.Access-Control-Allow-Origin": "'*'",
-                  "method.response.header.Access-Control-Expose-Headers": "'X-Wisetack-Token,Cache-Control,Pragma,Expires,X-XSS-Protection,X-Content-Type-Options,Content-Type,Strict-Transport-Security,Content-Security-Policy,Referrer-Policy'",
-                  "method.response.header.Cache-Control": "'no-cache,no-store,must-revalidate'",
-                  "method.response.header.Pragma": "'no-cache'",
-                  "method.response.header.Expires": "'-1'",
-                  "method.response.header.X-XSS-Protection": "'1; mode=block'",
-                  "method.response.header.X-Content-Type-Options": "'nosniff'",
-                  "method.response.header.Content-Type": "'application/json; charset=utf-8'",
-                  "method.response.header.Strict-Transport-Security": "'max-age=31536000; includeSubDomains; preload'",
-                  "method.response.header.Content-Security-Policy": "'default-src https:'",
-                  "method.response.header.Referrer-Policy": "'same-origin'"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "$ref": "#/components/responses/CORSResponse"
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Ok",
-            "headers": {
-              "Access-Control-Allow-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Methods": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Origin": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Expose-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Cache-Control": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Pragma": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Expires": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-XSS-Protection": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-Content-Type-Options": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Type": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Strict-Transport-Security": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Security-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Referrer-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MerchantTransactionsResponseList"
+                  "$ref": "#/components/schemas/TransactionsResponse"
                 }
               }
             }
           },
           "400": {
             "description": "Bad Request.",
-            "headers": {
-              "Access-Control-Allow-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Methods": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Origin": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Expose-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Cache-Control": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Pragma": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Expires": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-XSS-Protection": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-Content-Type-Options": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Type": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Strict-Transport-Security": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Security-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Referrer-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -849,47 +240,6 @@
           },
           "401": {
             "description": "Unauthorized.",
-            "headers": {
-              "Access-Control-Allow-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Methods": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Origin": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Expose-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Cache-Control": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Pragma": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Expires": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-XSS-Protection": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-Content-Type-Options": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Type": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Strict-Transport-Security": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Security-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Referrer-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -900,47 +250,6 @@
           },
           "403": {
             "description": "Forbidden.",
-            "headers": {
-              "Access-Control-Allow-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Methods": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Origin": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Expose-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Cache-Control": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Pragma": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Expires": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-XSS-Protection": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-Content-Type-Options": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Type": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Strict-Transport-Security": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Security-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Referrer-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -951,47 +260,6 @@
           },
           "404": {
             "description": "Not Found.",
-            "headers": {
-              "Access-Control-Allow-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Methods": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Origin": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Expose-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Cache-Control": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Pragma": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Expires": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-XSS-Protection": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-Content-Type-Options": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Type": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Strict-Transport-Security": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Security-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Referrer-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -1002,47 +270,6 @@
           },
           "409": {
             "description": "Conflict.",
-            "headers": {
-              "Access-Control-Allow-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Methods": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Origin": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Expose-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Cache-Control": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Pragma": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Expires": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-XSS-Protection": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-Content-Type-Options": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Type": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Strict-Transport-Security": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Security-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Referrer-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -1053,47 +280,6 @@
           },
           "500": {
             "description": "Internal Server Error.",
-            "headers": {
-              "Access-Control-Allow-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Methods": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Origin": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Expose-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Cache-Control": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Pragma": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Expires": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-XSS-Protection": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-Content-Type-Options": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Type": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Strict-Transport-Security": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Security-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Referrer-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -1104,47 +290,6 @@
           },
           "501": {
             "description": "Not Implemented.",
-            "headers": {
-              "Access-Control-Allow-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Methods": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Allow-Origin": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Access-Control-Expose-Headers": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Cache-Control": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Pragma": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Expires": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-XSS-Protection": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "X-Content-Type-Options": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Type": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Strict-Transport-Security": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Content-Security-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              },
-              "Referrer-Policy": {
-                "$ref": "#/components/headers/accessControl"
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -1157,154 +302,49 @@
         "x-amazon-apigateway-integration": {
           "uri": "${lambda-arn-LambdaRequestHandler}",
           "credentials": "${api-role-arn}",
-          "httpMethod": "POST",
+          "httpMethod": "GET",
           "requestTemplates": {
             "application/json": "${request-template}"
           },
           "responses": {
             "default": {
               "statusCode": "200",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-IO-Blackbox'",
-                "method.response.header.Access-Control-Allow-Methods": "'GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Expose-Headers": "'X-Wisetack-Token,Cache-Control,Pragma,Expires,X-XSS-Protection,X-Content-Type-Options,Content-Type,Strict-Transport-Security,Content-Security-Policy,Referrer-Policy'",
-                "method.response.header.Cache-Control": "'no-cache,no-store,must-revalidate'",
-                "method.response.header.Pragma": "'no-cache'",
-                "method.response.header.Expires": "'-1'",
-                "method.response.header.X-XSS-Protection": "'1; mode=block'",
-                "method.response.header.X-Content-Type-Options": "'nosniff'",
-                "method.response.header.Content-Type": "'application/json; charset=utf-8'",
-                "method.response.header.Strict-Transport-Security": "'max-age=31536000; includeSubDomains; preload'",
-                "method.response.header.Content-Security-Policy": "'default-src https:'",
-                "method.response.header.Referrer-Policy": "'same-origin'"
-              },
               "responseTemplates": {
                 "application/json": "${response-template}"
               }
             },
             ".*httpStatus\\\":400.*": {
               "statusCode": "400",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-IO-Blackbox'",
-                "method.response.header.Access-Control-Allow-Methods": "'GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Expose-Headers": "'X-Wisetack-Token,Cache-Control,Pragma,Expires,X-XSS-Protection,X-Content-Type-Options,Content-Type,Strict-Transport-Security,Content-Security-Policy,Referrer-Policy'",
-                "method.response.header.Cache-Control": "'no-cache,no-store,must-revalidate'",
-                "method.response.header.Pragma": "'no-cache'",
-                "method.response.header.Expires": "'-1'",
-                "method.response.header.X-XSS-Protection": "'1; mode=block'",
-                "method.response.header.X-Content-Type-Options": "'nosniff'",
-                "method.response.header.Content-Type": "'application/json; charset=utf-8'",
-                "method.response.header.Strict-Transport-Security": "'max-age=31536000; includeSubDomains; preload'",
-                "method.response.header.Content-Security-Policy": "'default-src https:'",
-                "method.response.header.Referrer-Policy": "'same-origin'"
-              },
               "responseTemplates": {
                 "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
               }
             },
             ".*httpStatus\\\":401.*": {
               "statusCode": "401",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-IO-Blackbox'",
-                "method.response.header.Access-Control-Allow-Methods": "'GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Expose-Headers": "'X-Wisetack-Token,Cache-Control,Pragma,Expires,X-XSS-Protection,X-Content-Type-Options,Content-Type,Strict-Transport-Security,Content-Security-Policy,Referrer-Policy'",
-                "method.response.header.Cache-Control": "'no-cache,no-store,must-revalidate'",
-                "method.response.header.Pragma": "'no-cache'",
-                "method.response.header.Expires": "'-1'",
-                "method.response.header.X-XSS-Protection": "'1; mode=block'",
-                "method.response.header.X-Content-Type-Options": "'nosniff'",
-                "method.response.header.Content-Type": "'application/json; charset=utf-8'",
-                "method.response.header.Strict-Transport-Security": "'max-age=31536000; includeSubDomains; preload'",
-                "method.response.header.Content-Security-Policy": "'default-src https:'",
-                "method.response.header.Referrer-Policy": "'same-origin'"
-              },
               "responseTemplates": {
                 "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
               }
             },
             ".*httpStatus\\\":403.*": {
               "statusCode": "403",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-IO-Blackbox'",
-                "method.response.header.Access-Control-Allow-Methods": "'GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Expose-Headers": "'X-Wisetack-Token,Cache-Control,Pragma,Expires,X-XSS-Protection,X-Content-Type-Options,Content-Type,Strict-Transport-Security,Content-Security-Policy,Referrer-Policy'",
-                "method.response.header.Cache-Control": "'no-cache,no-store,must-revalidate'",
-                "method.response.header.Pragma": "'no-cache'",
-                "method.response.header.Expires": "'-1'",
-                "method.response.header.X-XSS-Protection": "'1; mode=block'",
-                "method.response.header.X-Content-Type-Options": "'nosniff'",
-                "method.response.header.Content-Type": "'application/json; charset=utf-8'",
-                "method.response.header.Strict-Transport-Security": "'max-age=31536000; includeSubDomains; preload'",
-                "method.response.header.Content-Security-Policy": "'default-src https:'",
-                "method.response.header.Referrer-Policy": "'same-origin'"
-              },
               "responseTemplates": {
                 "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
               }
             },
             ".*httpStatus\\\":404.*": {
               "statusCode": "404",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-IO-Blackbox'",
-                "method.response.header.Access-Control-Allow-Methods": "'GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Expose-Headers": "'X-Wisetack-Token,Cache-Control,Pragma,Expires,X-XSS-Protection,X-Content-Type-Options,Content-Type,Strict-Transport-Security,Content-Security-Policy,Referrer-Policy'",
-                "method.response.header.Cache-Control": "'no-cache,no-store,must-revalidate'",
-                "method.response.header.Pragma": "'no-cache'",
-                "method.response.header.Expires": "'-1'",
-                "method.response.header.X-XSS-Protection": "'1; mode=block'",
-                "method.response.header.X-Content-Type-Options": "'nosniff'",
-                "method.response.header.Content-Type": "'application/json; charset=utf-8'",
-                "method.response.header.Strict-Transport-Security": "'max-age=31536000; includeSubDomains; preload'",
-                "method.response.header.Content-Security-Policy": "'default-src https:'",
-                "method.response.header.Referrer-Policy": "'same-origin'"
-              },
               "responseTemplates": {
                 "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
               }
             },
             ".*httpStatus\\\":409.*": {
               "statusCode": "409",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-IO-Blackbox'",
-                "method.response.header.Access-Control-Allow-Methods": "'GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Expose-Headers": "'X-Wisetack-Token,Cache-Control,Pragma,Expires,X-XSS-Protection,X-Content-Type-Options,Content-Type,Strict-Transport-Security,Content-Security-Policy,Referrer-Policy'",
-                "method.response.header.Cache-Control": "'no-cache,no-store,must-revalidate'",
-                "method.response.header.Pragma": "'no-cache'",
-                "method.response.header.Expires": "'-1'",
-                "method.response.header.X-XSS-Protection": "'1; mode=block'",
-                "method.response.header.X-Content-Type-Options": "'nosniff'",
-                "method.response.header.Content-Type": "'application/json; charset=utf-8'",
-                "method.response.header.Strict-Transport-Security": "'max-age=31536000; includeSubDomains; preload'",
-                "method.response.header.Content-Security-Policy": "'default-src https:'",
-                "method.response.header.Referrer-Policy": "'same-origin'"
-              },
               "responseTemplates": {
                 "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
               }
             },
             ".*httpStatus\\\":500.*": {
               "statusCode": "500",
-              "responseParameters": {
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-IO-Blackbox'",
-                "method.response.header.Access-Control-Allow-Methods": "'GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH'",
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Expose-Headers": "'X-Wisetack-Token,Cache-Control,Pragma,Expires,X-XSS-Protection,X-Content-Type-Options,Content-Type,Strict-Transport-Security,Content-Security-Policy,Referrer-Policy'",
-                "method.response.header.Cache-Control": "'no-cache,no-store,must-revalidate'",
-                "method.response.header.Pragma": "'no-cache'",
-                "method.response.header.Expires": "'-1'",
-                "method.response.header.X-XSS-Protection": "'1; mode=block'",
-                "method.response.header.X-Content-Type-Options": "'nosniff'",
-                "method.response.header.Content-Type": "'application/json; charset=utf-8'",
-                "method.response.header.Strict-Transport-Security": "'max-age=31536000; includeSubDomains; preload'",
-                "method.response.header.Content-Security-Policy": "'default-src https:'",
-                "method.response.header.Referrer-Policy": "'same-origin'"
-              },
               "responseTemplates": {
                 "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
               }
@@ -1322,130 +362,6 @@
           "application/json": {
             "schema": {
               "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "responses": {
-      "CORSResponse": {
-        "description": "Default responnse for CORS method.",
-        "headers": {
-          "Access-Control-Allow-Headers": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "Access-Control-Allow-Methods": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "Access-Control-Allow-Origin": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "Access-Control-Expose-Headers": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "Cache-Control": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "Pragma": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "Expires": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "X-XSS-Protection": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "X-Content-Type-Options": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "Content-Type": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "Strict-Transport-Security": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "Content-Security-Policy": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "Referrer-Policy": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
             }
           }
         }
@@ -1472,7 +388,7 @@
       "TransactionResponse" : {
         "type" : "object"
       },
-      "MerchantTransactionsResponseList" : {
+      "TransactionsResponse" : {
         "type" : "array"
       }
     }
