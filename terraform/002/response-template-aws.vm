@@ -4,27 +4,27 @@
 #set($headers = $input.path('$.headers'))
 #set($stage = $context.stage)
 #foreach($headerName in $headers.keySet())
-    #set($context.responseOverride.header[\"$headerName\"] = \"$headers.get($headerName)\")#if($foreach.hasNext),#end
+    #set($context.responseOverride.header["$headerName"] = "$headers.get($headerName)")#if($foreach.hasNext),#end
 #end
 #if($errorMessage && !$errorMessage.empty)
 {
-    \"mapping_template\": true,
-    #if($responseBody && !$responseBody.empty && $responseBody != '\"\"' && $responseBody != '{}')
-    \"response\": $responseBody,
+    "mapping_template": true,
+    #if($responseBody && !$responseBody.empty && $responseBody != '""' && $responseBody != '{}')
+    "response": $responseBody,
     #end
     #if($errorType && !$errorType.empty)
-    \"type\": \"$errorType\",
+    "type": "$errorType",
     #end
     #if($errorMessage.startsWith('{'))
         #set ($errorMessageObj = $util.parseJson($errorMessage))
         #if($errorMessageObj.httpStatus && $errorMessageObj.errorMessage)
             #set($context.responseOverride.status = $errorMessageObj.httpStatus)
-            \"message\": \"$errorMessageObj.errorMessage\"
+            "message": "$errorMessageObj.errorMessage"
         #else
-            \"message\": $errorMessage
+            "message": $errorMessage
         #end
     #else
-        \"message\": \"$errorMessage\"
+        "message": "$errorMessage"
     #end
 }
 #else

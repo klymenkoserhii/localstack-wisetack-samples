@@ -2,7 +2,8 @@
 
 source ../terraform/shared/get-profile.sh
 
-API_ID=`aws apigateway get-rest-apis --region us-east-1 --profile "${PROFILE}" | jq -r '.items[] | select(.name == "LocalStack API Test") | .id'`
+API_ID=$(aws apigateway get-rest-apis --region us-east-1 --profile "${PROFILE}" | \
+jq -r '.items[] | select(.name == "LocalStack API Test") | .id')
 
 if [ -z "$API_ID" ]; then
   echo "ERROR: API ID not found."

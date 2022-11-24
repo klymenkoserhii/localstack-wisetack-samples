@@ -3,22 +3,29 @@
 #set($errorType = $input.path('$.errorType'))
 #set($headers = $input.path('$.headers'))
 #set($stage = $context.stage)
-#set($context.responseOverride = {\"header\": $headers})
+#set($context.responseOverride = {"header": $headers})
 #set($context.responseOverride.status = $input.path('$.statusCode'))
 #if($errorMessage && !$errorMessage.empty)
 {
-    #if($responseBody && !$responseBody.empty && $responseBody != '\"\"' && $responseBody != '{}')
-    \"response\": $responseBody,
+    "mapping_template": true,
+    #if($responseBody && !$responseBody.empty && $responseBody != '""' && $responseBody != '{}')
+    "response": $responseBody,
     #end
     #if($errorType && !$errorType.empty)
-    \"type\": \"$errorType\",
+    "type": "$errorType",
     #end
-    \"input\": $input.json('$'),
-    \"context\": \"$context\",
+    "input": $input.json('$'),
+    "context": "$context",
     #if($errorMessage.startsWith('{'))
-    \"message\": $errorMessage
+        #set ($errorMessageObj = $util.parseJson($errorMessage))
+        #if($errorMessageObj.httpStatus && $errorMessageObj.errorMessage)
+            #set($context.responseOverride.status = $errorMessageObj.httpStatus)
+            "message": "$errorMessageObj.errorMessage"
+        #else
+            "message": $errorMessage
+        #end
     #else
-    \"message\": \"$errorMessage\"
+        "message": "$errorMessage"
     #end
 }
 #else

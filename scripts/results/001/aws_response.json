@@ -1,15 +1,15 @@
 {
   "responseBody": {
     "context": {
-      "awsRequestId": "00165eb3-4f34-44b6-ad5e-ddc2bdf7855a",
+      "awsRequestId": "a4093661-ffbb-496c-ab4d-037e53419c00",
       "logGroupName": "/aws/lambda/LambdaRequestHandler",
-      "logStreamName": "2022/11/24/[$LATEST]fac79255291b431f91e030af4b4858da",
+      "logStreamName": "2022/11/24/[$LATEST]7018ab9fecfa47d5acc3940713805506",
       "functionName": "LambdaRequestHandler",
       "functionVersion": "$LATEST",
       "invokedFunctionArn": "arn:aws:lambda:us-east-1:502352461425:function:LambdaRequestHandler",
       "logger": {},
       "memoryLimitInMB": 128,
-      "remainingTimeInMillis": 899348
+      "remainingTimeInMillis": 899999
     },
     "event": {
       "header": {
@@ -22,30 +22,32 @@
       "LAMBDA_TASK_ROOT": "/var/task",
       "AWS_LAMBDA_FUNCTION_MEMORY_SIZE": "128",
       "TZ": ":UTC",
-      "AWS_SECRET_ACCESS_KEY": "1lJhhdfUfzVMtqGZyVLFgscPCUdmORtzTfwng7hk",
-      "AWS_DEFAULT_REGION": "us-east-1",
+      "AWS_SECRET_ACCESS_KEY": "-------",
       "AWS_EXECUTION_ENV": "AWS_Lambda_java11",
+      "AWS_DEFAULT_REGION": "us-east-1",
       "AWS_LAMBDA_LOG_GROUP_NAME": "/aws/lambda/LambdaRequestHandler",
       "_HANDLER": "com.wisetack.samples.LambdaRequestHandler::handleRequest",
       "LANG": "en_US.UTF-8",
       "LAMBDA_RUNTIME_DIR": "/var/runtime",
-      "AWS_SESSION_TOKEN": "IQoJb3JpZ2luX2VjEMv//////////wEaCXVzLWVhc3QtMSJHMEUCIQCKnl2RMAREsZo1lQB7gsw2RBOu/zvD1ARs30GCHfdiqAIgM6lqVRhQ9cejIPcqIq+Jy1LccRpCex1SysoXAOVl6W8qhQMI1P//////////ARADGgw1MDIzNTI0NjE0MjUiDLDvWGWywaVyfCnDuyrZAoGo15vbzftUxZrCuqlaBqXVF6JdqUQ5a2lL/Hl6mH4rvjHQ3hA2OjkPEwspR15NwqgdU6W2D3EonH6BAikbQjN/CkM+qFOUnM6+tHSbRD/b+JcJq9TmMpF1AnkQNPHJnbBmLY6DbJzt/FpSegFVvreFUU27NjWoATU6shXQ++jEQPKKpbeEF3RkB1rJ+1FDqhHUYA71V+KJcPHvj5UDF05uNYPkmdG7I7wFAUDw3RZoOnGlTw48YtHC+W7T5ixUah3y4ioi4balqa4Yy7qaYiy3FtPSKD3agKxTL1q4Kz7GO6k44Ike4EdOTiKQBwFbzglDp1iStOZkY6zk0GkryafjKvbgsgj+KYfDICrmnsAjSkWs1RNMdWiLIcEFYWJTYVjffl5i5aIqPpqhDquKqyX1Yl70J+eVCpTBWVndQt26gaB9BSL1iStBk+mK/My/Qb8K7Iv/33mYFjDUjf2bBjqeAbFQkOZuCfI+yDzfGyscUcU8pwePI5XNGwC6/gxdGXl37/uJ9fDZvkt9o/L9x0NCxyJPUnnjv8C/FiwBW4u3YH1EVSAnI9ZAAj3U0i8l/FavJ0SMfk0fy5cvUJv98pwM46+yv00ux3z6J7koVON+z7aebysAPCu4Q3G+6hWTNgxvkdew9Xn9DSXJ+5nhHRyQQYdunAc4w9pJiY3fgj/H",
-      "AWS_ACCESS_KEY_ID": "ASIAXJ5UKHZYYPMIMYOP",
+      "AWS_SESSION_TOKEN": "-------",
+      "AWS_ACCESS_KEY_ID": "-------",
       "LD_LIBRARY_PATH": "/var/lang/lib:/lib64:/usr/lib64:/var/runtime:/var/runtime/lib:/var/task:/var/task/lib:/opt/lib",
-      "_X_AMZN_TRACE_ID": "Root=1-637f46d4-536a19734282bc9857685fa8;Parent=64b28142153b346c;Sampled=0",
-      "AWS_SECRET_KEY": "1lJhhdfUfzVMtqGZyVLFgscPCUdmORtzTfwng7hk",
+      "_X_AMZN_TRACE_ID": "Root=1-637fae99-11ad4581564bd35f32c501f8;Parent=01bfc15b6d198097;Sampled=0",
+      "AWS_SECRET_KEY": "---------",
       "AWS_LAMBDA_RUNTIME_API": "127.0.0.1:9001",
       "AWS_REGION": "us-east-1",
-      "AWS_LAMBDA_LOG_STREAM_NAME": "2022/11/24/[$LATEST]fac79255291b431f91e030af4b4858da",
+      "AWS_LAMBDA_LOG_STREAM_NAME": "2022/11/24/[$LATEST]7018ab9fecfa47d5acc3940713805506",
       "AWS_LAMBDA_INITIALIZATION_TYPE": "on-demand",
       "AWS_XRAY_DAEMON_ADDRESS": "169.254.79.129:2000",
       "_AWS_XRAY_DAEMON_PORT": "2000",
       "AWS_XRAY_CONTEXT_MISSING": "LOG_ERROR",
       "AWS_LAMBDA_FUNCTION_VERSION": "$LATEST",
-      "AWS_ACCESS_KEY": "ASIAXJ5UKHZYYPMIMYOP",
+      "AWS_ACCESS_KEY": "-------",
       "AWS_LAMBDA_FUNCTION_NAME": "LambdaRequestHandler"
     }
   },
   "statusCode": 202,
-  "headers": {}
+  "headers": {
+    "X-Wisetack-Token": "Test-Wisetack-Token"
+  }
 }

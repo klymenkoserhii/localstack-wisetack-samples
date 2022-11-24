@@ -5,38 +5,38 @@
 #set($header = $allParams.get('header'))
 #set($stage = $context.stage)
 {
-    \"apiContext\": {
-        \"apiId\": \"$context.apiId\",
-        \"method\": \"$context.httpMethod\",
-        \"sourceIp\": \"$context.identity.sourceIp\",
-        \"userAgent\": \"$context.identity.userAgent\",
-        \"path\": \"$context.path\",
-        \"protocol\": \"$context.protocol\",
-        \"requestId\": \"$context.requestId\",
-        \"stage\": \"$stage\"
+    "apiContext": {
+        "apiId": "$context.apiId",
+        "method": "$context.httpMethod",
+        "sourceIp": "$context.identity.sourceIp",
+        "userAgent": "$context.identity.userAgent",
+        "path": "$context.path",
+        "protocol": "$context.protocol",
+        "requestId": "$context.requestId",
+        "stage": "$stage"
     },
-    \"path\": {
-        \"parameterMap\": {
+    "path": {
+        "parameterMap": {
             #foreach($paramName in $path.keySet())
-            \"$paramName\": $util.escapeJavaScript($path.get($paramName))#if($foreach.hasNext),#end
+            "$paramName": $util.escapeJavaScript($path.get($paramName))#if($foreach.hasNext),#end
             #end
         }
     },
-    \"querystring\": {
-        \"parameterMap\":{
+    "querystring": {
+        "parameterMap":{
             #foreach($paramName in $querystring.keySet())
-            \"$paramName\": $util.escapeJavaScript($querystring.get($paramName))#if($foreach.hasNext),#end
+            "$paramName": $util.escapeJavaScript($querystring.get($paramName))#if($foreach.hasNext),#end
             #end
         }
     },
-    \"header\": {
-        \"parameterMap\": {
+    "header": {
+        "parameterMap": {
             #foreach($i in [0..16])#set($item = $header[$i])
             #if($item[0])#if($i > 0),#end
-            \"$item[0]\": $util.escapeJavaScript($item[1])
+            "$item[0]": $util.escapeJavaScript($item[1])
             #end
             #end
         }
     },
-    \"body\": $jsonBody
+    "body": $jsonBody
 }

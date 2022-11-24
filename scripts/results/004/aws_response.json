@@ -1,0 +1,16 @@
+{
+  "httpStatus": 400,
+  "errorMessage": "Test Bad request"
+}
+
+< HTTP/2 400
+< content-type: application/json
+< content-length: 54
+< date: Thu, 24 Nov 2022 17:59:12 GMT
+< x-amzn-requestid: 7504696d-4dd5-4e90-8c16-5cc442a743af
+< x-amz-apigw-id: cHiVUEQVIAMFmQA=
+< x-amzn-trace-id: Root=1-637fb0ee-2b97889f75afd52b7108e25a;Sampled=0
+< x-cache: Error from cloudfront
+< via: 1.1 6bf6848b0a526667291cc03dfcf8febe.cloudfront.net (CloudFront)
+< x-amz-cf-pop: HAM50-C3
+< x-amz-cf-id: jAvsNoeOK6At1Op4P0lWsoGgOr_gRklcj_F09e6dpw6ldGJ3gsKS6w==

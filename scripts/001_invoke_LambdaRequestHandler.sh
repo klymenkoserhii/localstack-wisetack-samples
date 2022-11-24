@@ -14,8 +14,8 @@ aws lambda invoke --function-name LambdaRequestHandler \
   --payload file://invoke-lambda-payload.json \
   response.json
 
-test -f response.json && echo $(<response.json) | jq
+test -f response.json && echo "$(<response.json)" | jq
 
 end=$(date +%s)
 
-echo "Execution time was $(expr $end - $start) seconds."
+echo "Execution time was $((end-start)) seconds."

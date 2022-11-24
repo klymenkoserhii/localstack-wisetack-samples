@@ -22,6 +22,7 @@ public class LambdaRequestHandler implements RequestHandler<Map<String, Object>,
         responseBody.put("context", context);
         responseBody.put("env", System.getenv());
         response.setResponseBody(responseBody);
+        response.getHeaders().put("X-Wisetack-Token", "Test-Wisetack-Token");
         response.setStatusCode(202);
         return response;
     }
@@ -52,7 +53,7 @@ public class LambdaRequestHandler implements RequestHandler<Map<String, Object>,
     }
 
     private void throwApiException(int httpStatus, String errorMessage) {
-        throw new RuntimeException(String.format("{\"httpStatus\": %d, \"errorMessage\": \"%s\"}",
+        throw new RuntimeException(String.format("{\"httpStatus\":%d, \"errorMessage\":\"%s\"}",
                 httpStatus, errorMessage));
     }
 
