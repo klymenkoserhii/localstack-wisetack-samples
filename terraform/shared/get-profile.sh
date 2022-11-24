@@ -1,9 +1,10 @@
-PROFILE="local"
+PROFILE="wisetack-feature2" # "local" "wisetack-feature2"
 
 if [[ "${PROFILE}" == "local" ]]; then
   if [[ ! $(type -P "awslocal") ]]; then
     echo "To use the 'local' profile you need to install awslocal. Run this and retry:"
     echo "  pip install awscli-local"
+    echo "  also you need to add credentials for 'local' profile to ~/.aws/credentials"
     exit 1
   fi
 

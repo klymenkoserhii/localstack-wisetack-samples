@@ -1,12 +1,16 @@
 #!/bin/bash
 
+source ../terraform/shared/get-profile.sh
+
 echo "Invoking LambdaRequestHandler."
 
 test -f response.json && rm response.json
 
 start=$(date +%s)
 
-awslocal lambda invoke --function-name LambdaRequestHandler \
+aws lambda invoke --function-name LambdaRequestHandler \
+  --region us-east-1 \
+  --profile "${PROFILE}" \
   --payload file://invoke-lambda-payload.json \
   response.json
 

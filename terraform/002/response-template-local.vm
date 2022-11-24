@@ -3,11 +3,7 @@
 #set($errorType = $input.path('$.errorType'))
 #set($headers = $input.path('$.headers'))
 #set($stage = $context.stage)
-#if(!$context.responseOverride && $stage == 'local')
-    #set($context.responseOverride = {\"header\": $headers})
-#else
-    #set($context.responseOverride.header = $headers)
-#end
+#set($context.responseOverride = {\"header\": $headers})
 #set($context.responseOverride.status = $input.path('$.statusCode'))
 #if($errorMessage && !$errorMessage.empty)
 {
@@ -17,10 +13,8 @@
     #if($errorType && !$errorType.empty)
     \"type\": \"$errorType\",
     #end
-    #if($stage == 'local')
     \"input\": $input.json('$'),
     \"context\": \"$context\",
-    #end
     #if($errorMessage.startsWith('{'))
     \"message\": $errorMessage
     #else

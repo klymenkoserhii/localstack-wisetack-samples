@@ -1,7 +1,7 @@
 {
   "openapi" : "3.0.1",
   "info": {
-    "title" : "API Test",
+    "title" : "LocalStack API Test",
     "version" : "1.0.0"
   },
 
@@ -302,7 +302,7 @@
         "x-amazon-apigateway-integration": {
           "uri": "${lambda-arn-LambdaRequestHandler}",
           "credentials": "${api-role-arn}",
-          "httpMethod": "GET",
+          "httpMethod": "POST",
           "requestTemplates": {
             "application/json": "${request-template}"
           },

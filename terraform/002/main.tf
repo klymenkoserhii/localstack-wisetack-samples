@@ -1,8 +1,28 @@
-resource "aws_lambda_function" "lambda-function-LambdaRequestHandler" {
+locals {
+  stage-name = "local-test"
+  api_gateway_log_format = jsonencode({
+    "requestId":          "$context.requestId",
+    "trueRequestId":      "$context.extendedRequestId",
+    "sourceIp":           "$context.identity.sourceIp",
+    "requestTime":        "$context.requestTime",
+    "httpMethod":         "$context.httpMethod",
+    "resourcePath":       "$context.resourcePath",
+    "status":             "$context.status",
+    "protocol":           "$context.protocol",
+    "responseLength":     "$context.responseLength",
+    "responseLatency":    "$context.responseLatency",
+    "integrationLatency": "$context.integration.latency",
+    "validationError":    "$context.error.validationErrorString",
+    "userAgent":          "$context.identity.userAgent",
+    "path":               "$context.path"
+  })
+}
+
+resource "aws_lambda_function" "lambda-test-function-LambdaRequestHandler" {
   filename = "../../target/localstack-wisetack-samples-1.0.jar"
   function_name = "LambdaRequestHandler"
   runtime = "java11"
-  role = aws_iam_role.lambda-role.arn
+  role = aws_iam_role.lambda-test-role.arn
   timeout = "900"
   source_code_hash = filebase64sha256("../../target/localstack-wisetack-samples-1.0.jar")
   publish = true
@@ -10,8 +30,8 @@ resource "aws_lambda_function" "lambda-function-LambdaRequestHandler" {
   architectures = ["arm64"]
 }
 
-resource "aws_iam_role" "lambda-role" {
-  name = "lambdaRole"
+resource "aws_iam_role" "lambda-test-role" {
+  name = "lambdaTestRole"
   assume_role_policy = <<POLICY
 {
   "Version": "2012-10-17",
@@ -29,8 +49,8 @@ resource "aws_iam_role" "lambda-role" {
 POLICY
 }
 
-resource "aws_iam_role" "api-role" {
-  name               = "api-role"
+resource "aws_iam_role" "api-test-role" {
+  name               = "api-test-role"
   assume_role_policy = <<-EOF
     {
       "Version": "2012-10-17",
@@ -48,9 +68,9 @@ resource "aws_iam_role" "api-role" {
   EOF
 }
 
-resource "aws_iam_role_policy" "api-policy" {
-  name     = "api-policy"
-  role     = aws_iam_role.api-role.id
+resource "aws_iam_role_policy" "api-test-policy" {
+  name     = "api-test-policy"
+  role     = aws_iam_role.api-test-role.id
   policy   = <<-EOF
     {
       "Version": "2012-10-17",
@@ -65,13 +85,42 @@ resource "aws_iam_role_policy" "api-policy" {
   EOF
 }
 
-resource "aws_api_gateway_rest_api" "api" {
-  name = "LocalStack Wisetack API"
+resource "aws_api_gateway_rest_api" "api-test" {
+  name = "LocalStack API Test"
   body = templatefile("./api.json", {
-    api-role-arn = aws_iam_role.api-role.arn
-    lambda-arn-LambdaRequestHandler = aws_lambda_function.lambda-function-LambdaRequestHandler.invoke_arn
-    request-template = file("./request-template.vm")
-    response-template = file("./response-template.vm")
+    api-role-arn = aws_iam_role.api-test-role.arn
+    lambda-arn-LambdaRequestHandler = aws_lambda_function.lambda-test-function-LambdaRequestHandler.invoke_arn
+    request-template = replace(file(var.use_localstack ? "./request-template-localstack.vm" : "./request-template-aws.vm"), "\n", "")
+    response-template = replace(file(var.use_localstack ? "./response-template-localstack.vm" : "./response-template-aws.vm"), "\n", "")
   })
 }
+
+resource "aws_api_gateway_deployment" "api-test-deployment" {
+  rest_api_id = aws_api_gateway_rest_api.api-test.id
+
+  triggers = {
+    redeployment = sha1(jsonencode(aws_api_gateway_rest_api.api-test.body))
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_cloudwatch_log_group" "api-test-access-logs" {
+  name              = "/local-test/apigateway/api"
+  retention_in_days = 365
+}
+
+resource "aws_api_gateway_stage" "api-test-stage" {
+  deployment_id = aws_api_gateway_deployment.api-test-deployment.id
+  rest_api_id = aws_api_gateway_rest_api.api-test.id
+  stage_name = local.stage-name
+
+  access_log_settings {
+    destination_arn = aws_cloudwatch_log_group.api-test-access-logs.arn
+    format = local.api_gateway_log_format
+  }
+}
+
 
