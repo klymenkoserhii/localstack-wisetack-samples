@@ -58,66 +58,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
           }
         },
         "x-amazon-apigateway-integration": {
@@ -136,36 +76,6 @@
             },
             ".*httpStatus\\\":400.*": {
               "statusCode": "400",
-              "responseTemplates": {
-                "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
-              }
-            },
-            ".*httpStatus\\\":401.*": {
-              "statusCode": "401",
-              "responseTemplates": {
-                "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
-              }
-            },
-            ".*httpStatus\\\":403.*": {
-              "statusCode": "403",
-              "responseTemplates": {
-                "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
-              }
-            },
-            ".*httpStatus\\\":404.*": {
-              "statusCode": "404",
-              "responseTemplates": {
-                "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
-              }
-            },
-            ".*httpStatus\\\":409.*": {
-              "statusCode": "409",
-              "responseTemplates": {
-                "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
-              }
-            },
-            ".*httpStatus\\\":500.*": {
-              "statusCode": "500",
               "responseTemplates": {
                 "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
               }
@@ -237,66 +147,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
           }
         },
         "x-amazon-apigateway-integration": {
@@ -315,36 +165,6 @@
             },
             ".*httpStatus\\\":400.*": {
               "statusCode": "400",
-              "responseTemplates": {
-                "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
-              }
-            },
-            ".*httpStatus\\\":401.*": {
-              "statusCode": "401",
-              "responseTemplates": {
-                "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
-              }
-            },
-            ".*httpStatus\\\":403.*": {
-              "statusCode": "403",
-              "responseTemplates": {
-                "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
-              }
-            },
-            ".*httpStatus\\\":404.*": {
-              "statusCode": "404",
-              "responseTemplates": {
-                "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
-              }
-            },
-            ".*httpStatus\\\":409.*": {
-              "statusCode": "409",
-              "responseTemplates": {
-                "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
-              }
-            },
-            ".*httpStatus\\\":500.*": {
-              "statusCode": "500",
               "responseTemplates": {
                 "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
               }
@@ -369,18 +189,7 @@
     },
     "schemas": {
       "Error": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "request-id": {
-            "type": "string"
-          }
-        }
+        "type": "object"
       },
       "TransactionRequest" : {
         "type" : "object"
