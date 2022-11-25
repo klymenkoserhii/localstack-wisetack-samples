@@ -14,20 +14,16 @@
     #if($errorType && !$errorType.empty)
     "type": "$errorType",
     #end
-    "input": $input.json('$'),
-    "context": "$context",
     #if($errorMessage.startsWith('{'))
-        #set ($errorMessageObj = $util.parseJson($errorMessage))
-        #if($errorMessageObj.httpStatus && $errorMessageObj.errorMessage)
-            #set($context.responseOverride.status = $errorMessageObj.httpStatus)
-            "message": "$errorMessageObj.errorMessage"
-        #else
-            "message": $errorMessage
-        #end
+        "message": $errorMessage,
     #else
-        "message": "$errorMessage"
+        "message": "$errorMessage",
     #end
+    #set($context.responseOverride.status = 500)
+    "input": $input.json('$'),
+    "context": "$context"
 }
 #else
+    #set($context.responseOverride.status = $input.path('$.statusCode'))
     $responseBody
 #end
