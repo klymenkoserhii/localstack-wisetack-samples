@@ -1,3 +1,6 @@
 {
-  "header": {"param": "value"}
+  "body": {"param": "param_value"},
+  "header": {"parameterMap": {
+    "X-Test-Header": "header_value"
+  }}
 }

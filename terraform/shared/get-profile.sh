@@ -1,4 +1,4 @@
-PROFILE="local"
+PROFILE="wisetack-feature2"
 
 if [[ "${PROFILE}" == "local" ]]; then
   if [[ ! $(type -P "awslocal") ]]; then

@@ -4,15 +4,15 @@
   },
   "responseBody": {
     "context": {
-      "awsRequestId": "2e05e5fb-0e99-19d7-ca20-59e459045b1c",
+      "awsRequestId": "67fd3f8f-6963-1dbe-23db-93b4ee2a7e5c",
       "functionName": "LambdaRequestHandler",
       "functionVersion": "$LATEST",
       "invokedFunctionArn": "arn:aws:lambda:us-east-1:000000000000:function:LambdaRequestHandler",
       "logGroupName": "/aws/lambda/LambdaRequestHandler",
-      "logStreamName": "2022/11/24/[$LATEST]34c4c245ec9aefdfa6e762478f5c00b9",
+      "logStreamName": "2022/11/25/[$LATEST]0c2a0d12a748c5c8077734d7a1cf969d",
       "logger": {},
       "memoryLimitInMB": 1536,
-      "remainingTimeInMillis": 898460
+      "remainingTimeInMillis": 898521
     },
     "env": {
       "AWS_ACCESS_KEY": "test",
@@ -25,7 +25,7 @@
       "AWS_LAMBDA_FUNCTION_TIMEOUT": "900",
       "AWS_LAMBDA_FUNCTION_VERSION": "$LATEST",
       "AWS_LAMBDA_LOG_GROUP_NAME": "/aws/lambda/LambdaRequestHandler",
-      "AWS_LAMBDA_LOG_STREAM_NAME": "2022/11/24/[$LATEST]34c4c245ec9aefdfa6e762478f5c00b9",
+      "AWS_LAMBDA_LOG_STREAM_NAME": "2022/11/25/[$LATEST]0c2a0d12a748c5c8077734d7a1cf969d",
       "AWS_LAMBDA_RUNTIME_API": "127.0.0.1:9001",
       "AWS_REGION": "us-east-1",
       "AWS_SECRET_ACCESS_KEY": "test",
@@ -35,7 +35,7 @@
       "DOCKER_LAMBDA_USE_STDIN": "1",
       "EDGE_PORT": "4566",
       "HOME": "/home/sbx_user1051",
-      "HOSTNAME": "50d5019ff80a",
+      "HOSTNAME": "6219bd86679d",
       "LAMBDA_RUNTIME_DIR": "/var/runtime",
       "LAMBDA_TASK_ROOT": "/var/task",
       "LANG": "en_US.UTF-8",
@@ -55,8 +55,13 @@
       "_X_AMZN_TRACE_ID": "Root=1-dc99d00f-c079a84d433534434534ef0d;Parent=91ed514f1e5c03b2;Sampled=1"
     },
     "event": {
+      "body": {
+        "param": "param_value"
+      },
       "header": {
-        "param": "value"
+        "parameterMap": {
+          "X-Test-Header": "header_value"
+        }
       }
     }
   },

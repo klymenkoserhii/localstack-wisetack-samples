@@ -1,19 +1,24 @@
 {
   "responseBody": {
     "context": {
-      "awsRequestId": "a4093661-ffbb-496c-ab4d-037e53419c00",
+      "awsRequestId": "c67d296e-49ee-493d-97fb-02eb8fde5e19",
       "logGroupName": "/aws/lambda/LambdaRequestHandler",
-      "logStreamName": "2022/11/24/[$LATEST]7018ab9fecfa47d5acc3940713805506",
+      "logStreamName": "2022/11/25/[$LATEST]6597e958376c43ddb4fd3b29645f5a00",
       "functionName": "LambdaRequestHandler",
       "functionVersion": "$LATEST",
       "invokedFunctionArn": "arn:aws:lambda:us-east-1:502352461425:function:LambdaRequestHandler",
       "logger": {},
       "memoryLimitInMB": 128,
-      "remainingTimeInMillis": 899999
+      "remainingTimeInMillis": 899302
     },
     "event": {
       "header": {
-        "param": "value"
+        "parameterMap": {
+          "X-Test-Header": "header_value"
+        }
+      },
+      "body": {
+        "param": "param_value"
       }
     },
     "env": {
@@ -22,27 +27,27 @@
       "LAMBDA_TASK_ROOT": "/var/task",
       "AWS_LAMBDA_FUNCTION_MEMORY_SIZE": "128",
       "TZ": ":UTC",
-      "AWS_SECRET_ACCESS_KEY": "-------",
-      "AWS_EXECUTION_ENV": "AWS_Lambda_java11",
+      "AWS_SECRET_ACCESS_KEY": "---",
       "AWS_DEFAULT_REGION": "us-east-1",
+      "AWS_EXECUTION_ENV": "AWS_Lambda_java11",
       "AWS_LAMBDA_LOG_GROUP_NAME": "/aws/lambda/LambdaRequestHandler",
       "_HANDLER": "com.wisetack.samples.LambdaRequestHandler::handleRequest",
       "LANG": "en_US.UTF-8",
       "LAMBDA_RUNTIME_DIR": "/var/runtime",
-      "AWS_SESSION_TOKEN": "-------",
-      "AWS_ACCESS_KEY_ID": "-------",
+      "AWS_SESSION_TOKEN": "---",
+      "AWS_ACCESS_KEY_ID": "---",
       "LD_LIBRARY_PATH": "/var/lang/lib:/lib64:/usr/lib64:/var/runtime:/var/runtime/lib:/var/task:/var/task/lib:/opt/lib",
-      "_X_AMZN_TRACE_ID": "Root=1-637fae99-11ad4581564bd35f32c501f8;Parent=01bfc15b6d198097;Sampled=0",
-      "AWS_SECRET_KEY": "---------",
+      "_X_AMZN_TRACE_ID": "Root=1-63809f2d-0d2487973e2069507c7c4713;Parent=2170ed9c360d9933;Sampled=0",
+      "AWS_SECRET_KEY": "---",
       "AWS_LAMBDA_RUNTIME_API": "127.0.0.1:9001",
       "AWS_REGION": "us-east-1",
-      "AWS_LAMBDA_LOG_STREAM_NAME": "2022/11/24/[$LATEST]7018ab9fecfa47d5acc3940713805506",
+      "AWS_LAMBDA_LOG_STREAM_NAME": "2022/11/25/[$LATEST]6597e958376c43ddb4fd3b29645f5a00",
       "AWS_LAMBDA_INITIALIZATION_TYPE": "on-demand",
       "AWS_XRAY_DAEMON_ADDRESS": "169.254.79.129:2000",
       "_AWS_XRAY_DAEMON_PORT": "2000",
       "AWS_XRAY_CONTEXT_MISSING": "LOG_ERROR",
       "AWS_LAMBDA_FUNCTION_VERSION": "$LATEST",
-      "AWS_ACCESS_KEY": "-------",
+      "AWS_ACCESS_KEY": "---",
       "AWS_LAMBDA_FUNCTION_NAME": "LambdaRequestHandler"
     }
   },

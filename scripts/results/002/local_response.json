@@ -1,14 +1,14 @@
 {
   "context": {
-    "awsRequestId": "37ff5d95-3e60-1b6f-221a-ec17a46f1bcb",
+    "awsRequestId": "e7b9d971-937a-19e4-72b7-05e3cf09c429",
     "functionName": "LambdaRequestHandler",
     "functionVersion": "$LATEST",
     "invokedFunctionArn": "arn:aws:lambda:us-east-1:000000000000:function:LambdaRequestHandler",
     "logGroupName": "/aws/lambda/LambdaRequestHandler",
-    "logStreamName": "2022/11/24/[$LATEST]35c5ceb1f1653c26319a754202b88794",
+    "logStreamName": "2022/11/25/[$LATEST]7f72fff640e4302bf7237d28014902a3",
     "logger": {},
     "memoryLimitInMB": 1536,
-    "remainingTimeInMillis": 898401
+    "remainingTimeInMillis": 898377
   },
   "env": {
     "AWS_ACCESS_KEY": "test",
@@ -21,7 +21,7 @@
     "AWS_LAMBDA_FUNCTION_TIMEOUT": "900",
     "AWS_LAMBDA_FUNCTION_VERSION": "$LATEST",
     "AWS_LAMBDA_LOG_GROUP_NAME": "/aws/lambda/LambdaRequestHandler",
-    "AWS_LAMBDA_LOG_STREAM_NAME": "2022/11/24/[$LATEST]35c5ceb1f1653c26319a754202b88794",
+    "AWS_LAMBDA_LOG_STREAM_NAME": "2022/11/25/[$LATEST]7f72fff640e4302bf7237d28014902a3",
     "AWS_LAMBDA_RUNTIME_API": "127.0.0.1:9001",
     "AWS_REGION": "us-east-1",
     "AWS_SECRET_ACCESS_KEY": "test",
@@ -31,7 +31,7 @@
     "DOCKER_LAMBDA_USE_STDIN": "1",
     "EDGE_PORT": "4566",
     "HOME": "/home/sbx_user1051",
-    "HOSTNAME": "261b75d6ddc9",
+    "HOSTNAME": "cfee43ac5b3d",
     "LAMBDA_RUNTIME_DIR": "/var/runtime",
     "LAMBDA_TASK_ROOT": "/var/task",
     "LANG": "en_US.UTF-8",
@@ -52,11 +52,11 @@
   },
   "event": {
     "apiContext": {
-      "apiId": "5ygtxmzh6m",
+      "apiId": "v1qp1v76ox",
       "method": "POST",
       "path": "/local/products/abcd-1234/items",
       "protocol": "HTTP/1.1",
-      "requestId": "f4881de8-f743-46c3-bd57-e297085f8938",
+      "requestId": "28d5ae4d-58c7-4ebf-9ac6-937fe4735519",
       "sourceIp": "172.18.0.1",
       "stage": "local",
       "userAgent": "unirest-java/curl"
@@ -67,7 +67,7 @@
     "header": {
       "parameterMap": {
         "Accept": "*/*",
-        "Content-Length": 17,
+        "Content-Length": "17",
         "Content-Type": "application/json",
         "Host": "localhost:4566",
         "User-Agent": "unirest-java/curl",
@@ -83,7 +83,7 @@
     },
     "querystring": {
       "parameterMap": {
-        "limit": 100,
+        "limit": "100",
         "status": "PENDING"
       }
     }
@@ -92,7 +92,7 @@
 
 < HTTP/1.1 200
 < Content-Type: text/plain; charset=utf-8
-< Content-Length: 2811
+< Content-Length: 2819
 < Connection: close
-< date: Thu, 24 Nov 2022 18:16:35 GMT
+< date: Fri, 25 Nov 2022 10:50:49 GMT
 < server: hypercorn-h11
