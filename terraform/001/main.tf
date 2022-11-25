@@ -1,205 +1,94 @@
-data "aws_caller_identity" "current-identity" {}
+provider "aws" {
+  profile = var.profile
 
-locals {
-  lambda-arn-prefix = "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:${data.aws_caller_identity.current-identity.account_id}:function:"
-  stage-name = "local"
-  api_gateway_log_format = jsonencode({
-    "requestId":          "$context.requestId",
-    "trueRequestId":      "$context.extendedRequestId",
-    "sourceIp":           "$context.identity.sourceIp",
-    "requestTime":        "$context.requestTime",
-    "httpMethod":         "$context.httpMethod",
-    "resourcePath":       "$context.resourcePath",
-    "status":             "$context.status",
-    "protocol":           "$context.protocol",
-    "responseLength":     "$context.responseLength",
-    "responseLatency":    "$context.responseLatency",
-    "integrationLatency": "$context.integration.latency",
-    "validationError":    "$context.error.validationErrorString",
-    "userAgent":          "$context.identity.userAgent",
-    "path":               "$context.path"
-  })
-}
+  region  = "us-west-2"
+  alias  = "us-west-2"
 
-resource "aws_lambda_function" "lambda-function-LambdaRequestHandler" {
-  filename = "../../target/localstack-wisetack-samples-1.0.jar"
-  function_name = "LambdaRequestHandler"
-  runtime = "java11"
-  role = aws_iam_role.lambda-role.arn
-  timeout = "900"
-  source_code_hash = filebase64sha256("../../target/localstack-wisetack-samples-1.0.jar")
-  publish = true
-  handler = "com.wisetack.samples.LambdaRequestHandler::handleRequest"
-  architectures = ["arm64"]
-}
-
-resource "aws_iam_role" "lambda-role" {
-  name = "lambdaRole"
-  assume_role_policy = <<POLICY
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "lambda.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": ""
+  default_tags {
+    tags = {
+      Environment = "local"
+      Service     = "LocalStack"
     }
+  }
+
+  s3_use_path_style           = var.use_localstack
+  skip_credentials_validation = var.use_localstack
+  skip_metadata_api_check     = var.use_localstack
+  skip_requesting_account_id  = var.use_localstack
+
+  endpoints {
+    acm             = var.use_localstack ? "http://localhost:4566" : null
+    apigateway      = var.use_localstack ? "http://localhost:4566" : null
+    cloudformation  = var.use_localstack ? "http://localhost:4566" : null
+    cloudwatch      = var.use_localstack ? "http://localhost:4566" : null
+    cloudwatchevents = var.use_localstack ? "http://localhost:4566" : null
+    cloudwatchlogs  = var.use_localstack ? "http://localhost:4566" : null
+    cognitoidentity = var.use_localstack ? "http://localhost:4566" : null
+    cognitoidp      = var.use_localstack ? "http://localhost:4566" : null
+    cognitosync     = var.use_localstack ? "http://localhost:4566" : null
+    dynamodb        = var.use_localstack ? "http://localhost:4566" : null
+    es              = var.use_localstack ? "http://localhost:4566" : null
+    iam             = var.use_localstack ? "http://localhost:4566" : null
+    kinesis         = var.use_localstack ? "http://localhost:4566" : null
+    lambda          = var.use_localstack ? "http://localhost:4566" : null
+    route53         = var.use_localstack ? "http://localhost:4566" : null
+    redshift        = var.use_localstack ? "http://localhost:4566" : null
+    s3              = var.use_localstack ? "http://s3.localhost.localstack.cloud:4566" : null
+    secretsmanager  = var.use_localstack ? "http://localhost:4566" : null
+    ses             = var.use_localstack ? "http://localhost:4566" : null
+    sns             = var.use_localstack ? "http://localhost:4566" : null
+    sqs             = var.use_localstack ? "http://localhost:4566" : null
+    ssm             = var.use_localstack ? "http://localhost:4566" : null
+    stepfunctions   = var.use_localstack ? "http://localhost:4566" : null
+    sts             = var.use_localstack ? "http://localhost:4566" : null
+  }
+}
+
+resource "aws_dynamodb_table" "us-east-1-local-test" {
+  provider = aws.us-east-1
+
+  hash_key         = "myAttribute"
+  name             = "myTable"
+  stream_enabled   = true
+  stream_view_type = "NEW_AND_OLD_IMAGES"
+  read_capacity    = 1
+  write_capacity   = 1
+
+  attribute {
+    name = "myAttribute"
+    type = "S"
+  }
+}
+
+resource "aws_dynamodb_table" "us-west-2-local-test" {
+  provider = aws.us-west-2
+
+  hash_key         = "myAttribute"
+  name             = "myTable"
+  stream_enabled   = true
+  stream_view_type = "NEW_AND_OLD_IMAGES"
+  read_capacity    = 1
+  write_capacity   = 1
+
+  attribute {
+    name = "myAttribute"
+    type = "S"
+  }
+}
+
+resource "aws_dynamodb_global_table" "global-table-local-test" {
+  depends_on = [
+    aws_dynamodb_table.us-east-1-local-test,
+    aws_dynamodb_table.us-west-2-local-test
   ]
-}
-POLICY
-}
+  provider = aws.us-east-1
 
-resource "aws_api_gateway_account" "api-account" {
-  cloudwatch_role_arn = aws_iam_role.cloudwatch-role.arn
-}
-
-resource "aws_iam_role" "cloudwatch-role" {
-  name               = "cloudwatch-role"
-  assume_role_policy = <<-EOF
-    {
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Sid": "",
-          "Effect": "Allow",
-          "Principal": {
-            "Service": ["apigateway.amazonaws.com", "sns.amazonaws.com", "sms.amazonaws.com"]
-          },
-          "Action": "sts:AssumeRole"
-        }
-      ]
-    }
-  EOF
-}
-
-resource "aws_iam_role_policy" "cloudwatch-policy" {
-  name     = "default"
-  role     = aws_iam_role.cloudwatch-role.id
-  policy   = <<-EOF
-    {
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Effect": "Allow",
-          "Action": [
-            "logs:CreateLogGroup",
-            "logs:CreateLogStream",
-            "logs:DescribeLogGroups",
-            "logs:DescribeLogStreams",
-            "logs:PutLogEvents",
-            "logs:GetLogEvents",
-            "logs:FilterLogEvents",
-            "logs:PutMetricFilter",
-            "logs:PutRetentionPolicy"
-          ],
-          "Resource": "*"
-        }
-      ]
-    }
-  EOF
-}
-
-resource "aws_iam_role" "api-role" {
-  name               = "api-role"
-  assume_role_policy = <<-EOF
-    {
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Sid": "",
-          "Effect": "Allow",
-          "Principal": {
-            "Service": "apigateway.amazonaws.com"
-          },
-          "Action": "sts:AssumeRole"
-        }
-      ]
-    }
-  EOF
-}
-
-resource "aws_iam_role_policy" "api-policy" {
-  name     = "api-policy"
-  role     = aws_iam_role.api-role.id
-  policy   = <<-EOF
-    {
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Effect": "Allow",
-          "Action": "lambda:InvokeFunction",
-          "Resource": "*"
-        }
-      ]
-    }
-  EOF
-}
-
-resource "aws_api_gateway_rest_api" "api" {
-  name = "LocalStack Wisetack API"
-  body = templatefile("../../specs/api.json", {
-    api-role-arn = aws_iam_role.api-role.arn
-    lambda-arn-LambdaRequestHandler = aws_lambda_function.lambda-function-LambdaRequestHandler.invoke_arn
-  })
-}
-
-resource "aws_api_gateway_deployment" "api-deployment" {
-  rest_api_id = aws_api_gateway_rest_api.api.id
-
-  triggers = {
-    redeployment = sha1(jsonencode(aws_api_gateway_rest_api.api.body))
+  name = "global-table-local-test"
+  replica {
+    region_name = "us-east-1"
   }
-
-  lifecycle {
-    create_before_destroy = true
+  replica {
+    region_name = "us-west-2"
   }
 }
-
-resource "aws_cloudwatch_log_group" "api-access-logs" {
-  name              = "/local-wisetack/apigateway/api"
-  retention_in_days = 365
-}
-
-resource "aws_api_gateway_stage" "api-stage" {
-  deployment_id = aws_api_gateway_deployment.api-deployment.id
-  rest_api_id = aws_api_gateway_rest_api.api.id
-  stage_name = local.stage-name
-
-  access_log_settings {
-    destination_arn = aws_cloudwatch_log_group.api-access-logs.arn
-    format = local.api_gateway_log_format
-  }
-}
-
-resource "aws_api_gateway_method_settings" "api-gateway-settings" {
-  rest_api_id = aws_api_gateway_rest_api.api.id
-  stage_name = aws_api_gateway_stage.api-stage.stage_name
-  method_path = "*/*"
-  settings {
-    metrics_enabled = true
-    logging_level = "ERROR"
-    # Limit the rate of calls to prevent abuse and unwanted charges
-    throttling_rate_limit  = 100
-    throttling_burst_limit = 50
-  }
-}
-
-resource "aws_api_gateway_gateway_response" "gateway-bad-request-body-response" {
-  rest_api_id = aws_api_gateway_rest_api.api.id
-  response_type = "BAD_REQUEST_BODY"
-  status_code   = "400"
-  response_templates = {
-    "application/json" = "{\"message\":\"$context.error.validationErrorString\",\"code\":\"$context.error.responseType\",\"requestId\":\"$context.requestId\"}"
-  }
-  response_parameters = {
-    "gatewayresponse.header.Access-Control-Allow-Origin" = "'*'"
-  }
-}
-
-
-
-
 

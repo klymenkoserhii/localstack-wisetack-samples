@@ -19,6 +19,7 @@ locals {
 }
 
 resource "aws_lambda_function" "lambda-test-function-LambdaRequestHandler" {
+  provider = aws.us-east-1
   filename = "../../target/localstack-wisetack-samples-1.0.jar"
   function_name = "LambdaRequestHandler"
   runtime = "java11"
@@ -31,6 +32,7 @@ resource "aws_lambda_function" "lambda-test-function-LambdaRequestHandler" {
 }
 
 resource "aws_iam_role" "lambda-test-role" {
+  provider = aws.us-east-1
   name = "lambdaTestRole"
   assume_role_policy = <<POLICY
 {
@@ -50,6 +52,7 @@ POLICY
 }
 
 resource "aws_iam_role" "api-test-role" {
+  provider = aws.us-east-1
   name               = "api-test-role"
   assume_role_policy = <<-EOF
     {
@@ -69,6 +72,7 @@ resource "aws_iam_role" "api-test-role" {
 }
 
 resource "aws_iam_role_policy" "api-test-policy" {
+  provider = aws.us-east-1
   name     = "api-test-policy"
   role     = aws_iam_role.api-test-role.id
   policy   = <<-EOF
@@ -86,6 +90,7 @@ resource "aws_iam_role_policy" "api-test-policy" {
 }
 
 resource "aws_api_gateway_rest_api" "api-test" {
+  provider = aws.us-east-1
   name = "LocalStack API Test"
   body = templatefile("./api.json", {
     api-role-arn = aws_iam_role.api-test-role.arn
@@ -96,6 +101,7 @@ resource "aws_api_gateway_rest_api" "api-test" {
 }
 
 resource "aws_api_gateway_deployment" "api-test-deployment" {
+  provider = aws.us-east-1
   rest_api_id = aws_api_gateway_rest_api.api-test.id
 
   triggers = {
@@ -108,11 +114,13 @@ resource "aws_api_gateway_deployment" "api-test-deployment" {
 }
 
 resource "aws_cloudwatch_log_group" "api-test-access-logs" {
+  provider = aws.us-east-1
   name              = "/local-test/apigateway/api"
   retention_in_days = 365
 }
 
 resource "aws_api_gateway_stage" "api-test-stage" {
+  provider = aws.us-east-1
   deployment_id = aws_api_gateway_deployment.api-test-deployment.id
   rest_api_id = aws_api_gateway_rest_api.api-test.id
   stage_name = local.stage-name
