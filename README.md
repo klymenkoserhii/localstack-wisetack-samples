@@ -25,6 +25,7 @@ Steps to reproduce:
 
 ```shell
 cd ./terraform/001
+./init.sh
 ./apply.sh
 ```
 
@@ -57,14 +58,40 @@ created by github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource.(*StateC
 Error: The terraform-provider-aws_v4.32.0_x5 plugin crashed!
 ```
 
-Upon AWS cloud, this script runs without error.  
+Upon AWS cloud, this script runs without error. It looks like LocalStack don't return all data 
+required for terraform provider.  
 
 ### 2. API Gateway Lambda Integration Related Discrepancies.
 
 The two possible integrations are 'Lambda-Proxy' and 'Lambda'. 
+
 In this sample 'Lambda' integration used. This type of the integration offers more control 
 over transmission data. The request can be modified before it is sent to lambda and the 
 response can be modified after it is sent from lambda. This can be done by mapping templates 
 which transforms the payload, as per the user customisations. API Gateway uses Velocity
 Template Language (VTL) engine to process body mapping templates for the integration request
-and integration response.
+and integration response. The settings can be easily exported as Swagger specification.
+
+Unfortunately, mapping templates created to work with AWS cloud do not work with LocalStack.
+
+#### 2.1 Request Mapping Template Discrepancies.
+
+- $util.escapeJavaScript($path.get($paramName)) function works differently - LocalStack version 
+  returns string surrounded by double quotes, while AWS version - without double quotes.
+- $allParams.get('header') LocalStack version returns data in different format (array of tuples)
+  than AWS version (dictionary).
+
+These discrepancies require to keep two versions of mapping templates, one for AWS 
+and another for LocalStack.
+
+You can find request mapping templates source code here:
+- [AWS version](./terraform/002/request-template-aws.vm)
+- [LocalStack version](./terraform/002/request-template-local.vm)
+
+#### 2.2 Response Mapping Template Issues.
+
+#### 2.3 Mapping status codes to static values not working.
+
+Please see documentation on this feature [here](https://aws.amazon.com/premiumsupport/knowledge-center/api-gateway-status-codes-rest-api/)
+
+ 
