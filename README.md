@@ -254,6 +254,8 @@ for more details.
 I have not found a workaround for this drawback.
 I tried adding the responseOverride property to the $context object but that didn't work.
 
+Also, it looks like **$util.parseJson()** mapping template function does not implemented in LocalStack.
+
 You can find response mapping templates source code here:
 - [Working AWS version](./terraform/002/response-template-aws.vm)
 - [Not working localStack version](./terraform/002/response-template-local.vm)
