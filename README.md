@@ -116,7 +116,7 @@ You can find request mapping templates source code here:
 - [AWS version](./terraform/002/request-template-aws.vm)
 - [LocalStack version](./terraform/002/request-template-local.vm)
 
-**Workarounds for differences**:
+**Workarounds**:
 <table>
 <tr>
 <td>AWS version</td>
@@ -242,12 +242,53 @@ It looks like mapping template $context object does not contain responseOverride
 an API's response parameters and status codes. Please see [AWS documentation](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-override-request-response-parameters.html) 
 for more details. 
 
-I have not found a workaround for this drawback. 
+I have not found a workaround for this drawback.
+I tried adding the responseOverride property to the $context object but that didn't work.
+
+You can find response mapping templates source code here:
+- [Working AWS version](./terraform/002/response-template-aws.vm)
+- [Not working localStack version](./terraform/002/response-template-local.vm)
+
 At the moment it is not possible to override response headers and status codes when using API Gateway "Lambda" integration with LocalStack, 
 but this is required in our project.
 
 #### 2.3 Mapping status codes to static values doesn't work.
 
+A status code can’t be passed directly from the Lambda function in a non-proxy integration. 
+AWS recommends to use mapping templates or regular expressions to map the status codes.
 Please see documentation on this feature [here](https://aws.amazon.com/premiumsupport/knowledge-center/api-gateway-status-codes-rest-api/)
 
- 
+In this sample I used following configuration to map 400 status code (file [api.json](./terraform/002/api.json) line 77):
+
+```json
+  ".*httpStatus\\\":400.*": {
+    "statusCode": "400",
+    "responseTemplates": {
+      "application/json": "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
+    }
+  }
+```
+
+This configuration works fine with AWS Cloud but does not work with LocalStack.
+
+Steps to reproduce:
+
+Deploy to LocalStack:
+```shell
+cd ./terraform/002
+./init.sh
+./apply.sh
+```
+Made post API call to generate 400 error:
+```shell
+cd ./scripts
+./004_invoke_post_api_with_error.sh
+```
+
+In AWS Cloud 400 HTTP status code returned, but in LocalStack 200 returned.
+
+You can find examples of API responses [here](./scripts/results/004).
+
+#### CONCLUSION
+
+We cannot use LocalStack in our project until points 2.2 and 2.3 are fixed.

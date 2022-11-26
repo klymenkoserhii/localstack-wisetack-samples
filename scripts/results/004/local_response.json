@@ -21,3 +21,10 @@
   },
   "context": "{'accountId': '000000000000', 'apiId': 'v1qp1v76ox', 'resourcePath': '/products/{productId}/items', 'domainPrefix': 'localhost', 'domainName': 'localhost', 'resourceId': 'tetnsvgopb', 'requestId': 'fdcafa37-5ae1-4a68-8a35-39d117282f6f', 'identity': {'accountId': '000000000000', 'sourceIp': '172.18.0.1', 'userAgent': 'unirest-java/curl'}, 'httpMethod': 'POST', 'protocol': 'HTTP/1.1', 'requestTime': '25/Nov/2022:10:52:38 +0000', 'requestTimeEpoch': 1669373558527, 'authorizer': {}, 'path': '/local/products/abcd-1234/items', 'stage': 'local', 'responseOverride': {'header': [], 'status': 500}}"
 }
+
+< HTTP/1.1 200
+< Content-Type: text/plain; charset=utf-8
+< Content-Length: 1538
+< Connection: close
+< date: Sat, 26 Nov 2022 13:28:53 GMT
+< server: hypercorn-h11
