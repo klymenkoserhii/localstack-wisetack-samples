@@ -62,9 +62,9 @@ Error: The terraform-provider-aws_v4.32.0_x5 plugin crashed!
 Upon AWS cloud, this script runs without error. It looks like LocalStack don't return all data 
 required for terraform provider.  
 
-### 2. API Gateway Lambda Integration Related Discrepancies.
+### 2. API Gateway Lambda Integration Discrepancies.
 
-The two possible integrations are 'Lambda-Proxy' and 'Lambda'. 
+The two possible API Gateway integrations for lambda are 'Lambda-Proxy' and 'Lambda'. 
 
 In this sample 'Lambda' integration used. This type of the integration offers more control 
 over transmission data. The request can be modified before it is sent to lambda and the 
@@ -73,7 +73,7 @@ which transforms the payload, as per the user customisations. API Gateway uses V
 Template Language (VTL) engine to process body mapping templates for the integration request
 and integration response. The settings can be easily exported as Swagger specification.
 
-Unfortunately, mapping templates created to work with AWS cloud do not work with LocalStack.
+Unfortunately, mapping templates created to work with AWS Cloud do not work with LocalStack.
 
 #### 2.1 Request Mapping Template Discrepancies.
 
@@ -166,9 +166,87 @@ $util.escapeJavaScript($path.get($paramName))
 </tr>
 </table>
 
-#### 2.2 Response Mapping Template Issues.
+#### 2.2 Response Mapping Template Issue - response headers and status codes override doesn't work.
 
-#### 2.3 Mapping status codes to static values not working.
+When I use [response mapping template](./terraform/002/response-template-aws.vm) (which is working for AWS) in LocalStack I have this error:
+
+```shell
+localstack_wisetack_samples  | 2022-11-26T11:34:29.224 ERROR --- [   asgi_gw_2] l.s.apigateway.invocations : Error invoking integration for API Gateway ID '42x88rcuxw': line 1, column 268: expected assignment in set directive, got: ($context.responseOverride.header["$ ... ...
+localstack_wisetack_samples  | Traceback (most recent call last):
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 332, in require_next_element
+localstack_wisetack_samples  |     element = element_spec(self.filename, self._full_text,
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 270, in __init__
+localstack_wisetack_samples  |     self.parse()
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 992, in parse
+localstack_wisetack_samples  |     var_name, = self.identity_match(self.START)
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 287, in identity_match
+localstack_wisetack_samples  |     raise NoMatch()
+localstack_wisetack_samples  | airspeed.NoMatch
+localstack_wisetack_samples  |
+localstack_wisetack_samples  | During handling of the above exception, another exception occurred:
+localstack_wisetack_samples  |
+localstack_wisetack_samples  | Traceback (most recent call last):
+localstack_wisetack_samples  |   File "/opt/code/localstack/localstack/services/apigateway/invocations.py", line 291, in invoke_rest_api_integration
+localstack_wisetack_samples  |     response = invoke_rest_api_integration_backend(invocation_context)
+localstack_wisetack_samples  |   File "/opt/code/localstack/localstack/services/apigateway/invocations.py", line 333, in invoke_rest_api_integration_backend
+localstack_wisetack_samples  |     return LambdaIntegration().invoke(invocation_context)
+localstack_wisetack_samples  |   File "/opt/code/localstack/localstack/services/apigateway/integration.py", line 375, in invoke
+localstack_wisetack_samples  |     response_templates.render(invocation_context)
+localstack_wisetack_samples  |   File "/opt/code/localstack/localstack/services/apigateway/templates.py", line 242, in render
+localstack_wisetack_samples  |     response._content = self.render_vtl(template, variables=variables)
+localstack_wisetack_samples  |   File "/opt/code/localstack/localstack/services/apigateway/templates.py", line 171, in render_vtl
+localstack_wisetack_samples  |     return self.vtl.render_vtl(template, variables=variables)
+localstack_wisetack_samples  |   File "/opt/code/localstack/localstack/utils/aws/templating.py", line 87, in render_vtl
+localstack_wisetack_samples  |     rendered_template = t.merge(namespace)
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 95, in merge
+localstack_wisetack_samples  |     self.merge_to(namespace, output, loader)
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 105, in merge_to
+localstack_wisetack_samples  |     self.ensure_compiled()
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 100, in ensure_compiled
+localstack_wisetack_samples  |     self.root_element = TemplateBody(self.filename, self.content)
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 270, in __init__
+localstack_wisetack_samples  |     self.parse()
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 1245, in parse
+localstack_wisetack_samples  |     self.block = self.next_element(Block)
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 314, in next_element
+localstack_wisetack_samples  |     element = element_spec(self.filename, self._full_text, self.end)
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 270, in __init__
+localstack_wisetack_samples  |     self.parse()
+localstack_wisetack_samples  |   File "/opt/code/localstack/localstack/utils/aws/templating.py", line 162, in parse
+localstack_wisetack_samples  |     self.next_element(
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 320, in next_element
+localstack_wisetack_samples  |     element = element_class(self.filename, self._full_text,
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 270, in __init__
+localstack_wisetack_samples  |     self.parse()
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 1208, in parse
+localstack_wisetack_samples  |     self.block = self.next_element(Block)
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 314, in next_element
+localstack_wisetack_samples  |     element = element_spec(self.filename, self._full_text, self.end)
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 270, in __init__
+localstack_wisetack_samples  |     self.parse()
+localstack_wisetack_samples  |   File "/opt/code/localstack/localstack/utils/aws/templating.py", line 162, in parse
+localstack_wisetack_samples  |     self.next_element(
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 320, in next_element
+localstack_wisetack_samples  |     element = element_class(self.filename, self._full_text,
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 270, in __init__
+localstack_wisetack_samples  |     self.parse()
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 1186, in parse
+localstack_wisetack_samples  |     self.assignment = self.require_next_element(Assignment, 'assignment')
+localstack_wisetack_samples  |   File "/opt/code/localstack/.venv/lib/python3.10/site-packages/airspeed/__init__.py", line 335, in require_next_element
+localstack_wisetack_samples  |     raise self.syntax_error(expected)
+localstack_wisetack_samples  | airspeed.TemplateSyntaxError: line 1, column 268: expected assignment in set directive, got: ($context.responseOverride.header["$ ... ...
+localstack_wisetack_samples  | 2022-11-26T11:34:29.226  INFO --- [   asgi_gw_2] localstack.request.http    : POST /restapis/42x88rcuxw/local/_user_request_/products/abcd-1234/items => 400
+```
+
+It looks like mapping template $context object does not contain responseOverride property which is used to override 
+an API's response parameters and status codes. Please see [AWS documentation](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-override-request-response-parameters.html) 
+for more details. 
+
+I have not found a workaround for this drawback. 
+At the moment it is not possible to override response headers and status codes when using API Gateway "Lambda" integration with LocalStack, 
+but this is required in our project.
+
+#### 2.3 Mapping status codes to static values doesn't work.
 
 Please see documentation on this feature [here](https://aws.amazon.com/premiumsupport/knowledge-center/api-gateway-status-codes-rest-api/)
 
