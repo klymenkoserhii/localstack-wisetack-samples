@@ -10,6 +10,7 @@ This repository demonstrates some discrepancies between AWS and LocalStack.
 * Terraform
 * Java 11
 * Maven
+* [jq](https://stedolan.github.io/jq/)
 
 Before reproducing issues please build test lambda and start LocalStack by running 
 following commands in project's root directory:
