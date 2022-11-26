@@ -118,8 +118,8 @@ You can find request mapping templates source code here:
 **Workarounds for differences**:
 <table>
 <tr>
-<td>AWS</td>
-<td>LocalStack</td>
+<td>AWS version</td>
+<td>LocalStack workaround</td>
 </tr>
 <tr>
 <td>
@@ -143,7 +143,8 @@ $util.escapeJavaScript($path.get($paramName))
 #set($header = $allParams.get('header'))
 
 #foreach($paramName in $header.keySet())
-"$paramName": "$util.escapeJavaScript($header.get($paramName))"#if($foreach.hasNext),#end
+    "$paramName": "$util.escapeJavaScript($header.get($paramName))"
+    #if($foreach.hasNext),#end
 #end
 ```
 </td>
@@ -154,9 +155,10 @@ $util.escapeJavaScript($path.get($paramName))
 #set($header = $allParams.get('header'))
 
 #foreach($i in [0..16])#set($item = $header[$i])
-#if($item[0])#if($i > 0),#end
-"$item[0]": $util.escapeJavaScript($item[1])
-#end
+    #if($item[0])
+        #if($i > 0),#end
+        "$item[0]": $util.escapeJavaScript($item[1])
+    #end
 #end
 ```
 </td>
