@@ -12,13 +12,22 @@ This repository demonstrates some discrepancies between AWS and LocalStack.
 * Maven
 * [jq](https://stedolan.github.io/jq/)
 
-Before reproducing issues please build test lambda and start LocalStack by running 
-following commands in the repository root directory:
+Before reproducing issues:
 
-```shell
-mvn clean install
-docker-compose up
-```
+- add local profile to ~/.aws/credentials like this:
+  ```shell
+  [local]
+  aws_access_key_id=test
+  aws_secret_access_key=test
+  ```
+
+- build test lambda and start LocalStack by running 
+  following commands in the repository root directory:
+
+  ```shell
+  mvn clean install
+  docker-compose up
+  ```
 
 ### 1. AWS Global Table Creation with Terraform Issue.
 
@@ -289,6 +298,13 @@ In AWS Cloud 400 HTTP status code returned, but in LocalStack 200 returned.
 
 You can find examples of API responses [here](./scripts/results/004).
 
+> Note
+> 
+> Samples in this repo by default run against LocalStack, if you want to run them using AWS Cloud profile
+> please update first line in the file [get-profile.sh](./terraform/shared/get-profile.sh) 
+
+
 #### CONCLUSION
 
-We cannot use LocalStack in our project until points 2.2 and 2.3 are fixed.
+We cannot start to use LocalStack in our project until points 2.2 and 2.3 are fixed 
+as we don't have workarounds for them.
