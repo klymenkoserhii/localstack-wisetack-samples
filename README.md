@@ -13,7 +13,7 @@ This repository demonstrates some discrepancies between AWS and LocalStack.
 * [jq](https://stedolan.github.io/jq/)
 
 Before reproducing issues please build test lambda and start LocalStack by running 
-following commands in project's root directory:
+following commands in the repository root directory:
 
 ```shell
 mvn clean install
@@ -98,7 +98,7 @@ localstack_wisetack_samples  | botocore.errorfactory.UnsupportedMediaTypeExcepti
 localstack_wisetack_samples  | 2022-11-26T10:22:01.617  INFO --- [   asgi_gw_2] localstack.request.http    : POST /restapis/lj2gaa9hdn/local/_user_request_/products/abcd-1234/items => 400
 ```
 
-Digging further I found following **discrepancies:**
+Digging further, I found the following **discrepancies:**
 
 - **$util.escapeJavaScript($path.get($paramName))** 
   
@@ -120,7 +120,7 @@ You can find request mapping templates source code here:
 <table>
 <tr>
 <td>AWS version</td>
-<td>LocalStack workaround</td>
+<td>Workaround for LocalStack</td>
 </tr>
 <tr>
 <td>
