@@ -9,25 +9,29 @@ import com.google.gson.GsonBuilder;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LambdaRequestHandler implements RequestHandler<ApiRequest, ApiResponse> {
+public class LambdaRequestProxyHandler implements RequestHandler<ApiProxyRequest, ApiProxyResponse> {
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public ApiResponse handleRequest(ApiRequest event, Context context) {
+    @Override
+    public ApiProxyResponse handleRequest(ApiProxyRequest event, Context context) {
         LambdaLogger logger = context.getLogger();
         logger.log("EVENT: " + gson.toJson(event));
-        testException(event); // to test exception provide request body like {httpStatus: 400}
-        ApiResponse response = new ApiResponse();
+        testException(event);
+        ApiProxyResponse response = new ApiProxyResponse();
         Map<String, Object> responseBody = new HashMap<>();
         responseBody.put("event", event);
         responseBody.put("context", context);
         responseBody.put("env", System.getenv());
-        response.setResponseBody(responseBody);
+        response.setBody(gson.toJson(responseBody));
         response.getHeaders().put("X-Wisetack-Token", "Test-Wisetack-Token");
         response.setStatusCode(202);
+        response.setBase64Encoded(false);
         return response;
     }
 
-    private void testException(ApiRequest event) {
+    private void testException(ApiProxyRequest event) {
+        // Mapping status codes to static values on exception (with regular expression) doesn't work
+        // in case of "aws-proxy" integration type (for both, AWS Cloud and LocalStack)
         new ApiExceptionThrower(event.getBody());
     }
 

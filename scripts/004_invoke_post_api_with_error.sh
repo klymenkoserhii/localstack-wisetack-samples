@@ -6,7 +6,7 @@ source ./000_get_api_url.sh
 start=$(date +%s)
 
 data=$(curl -v -H "Content-Type: application/json" -H "User-Agent: unirest-java/curl" \
--d "{\"httpStatus\": 400, \"errorMessage\": \"Test Bad request\"}" \
+-d "{\"httpStatus\": \"400\", \"errorMessage\": \"Test Bad request\"}" \
 "${API_URL}"/products/abcd-1234/items?status=PENDING\&limit=100)
 
 echo "${data}" | jq

@@ -1,0 +1,141 @@
+{
+  "context": {
+    "memoryLimit": 1536,
+    "awsRequestId": "86b7f8c0-9856-1839-3b68-3ba833244374",
+    "logGroupName": "/aws/lambda/LambdaRequestProxyHandler",
+    "logStreamName": "2022/11/27/[$LATEST]95f7fb1a7f4f3d511271aed1a7cabdc5",
+    "functionName": "LambdaRequestProxyHandler",
+    "functionVersion": "$LATEST",
+    "invokedFunctionArn": "arn:aws:lambda:us-east-1:000000000000:function:LambdaRequestProxyHandler",
+    "deadlineTimeInMs": 1669565111349,
+    "logger": {}
+  },
+  "event": {
+    "path": "/products/abcd-1234/items",
+    "headers": {
+      "Host": "localhost:4566",
+      "accept": "*/*",
+      "Content-Type": "application/json",
+      "User-Agent": "unirest-java/curl",
+      "Content-Length": "17",
+      "x-localstack-tgt-api": "apigateway",
+      "X-Forwarded-For": "172.18.0.1, localhost:4566",
+      "x-localstack-edge": "http://localhost:4566"
+    },
+    "multiValueHeaders": {
+      "Host": [
+        "localhost:4566"
+      ],
+      "accept": [
+        "*/*"
+      ],
+      "Content-Type": [
+        "application/json"
+      ],
+      "User-Agent": [
+        "unirest-java/curl"
+      ],
+      "Content-Length": [
+        "17"
+      ],
+      "x-localstack-tgt-api": [
+        "apigateway"
+      ],
+      "X-Forwarded-For": [
+        "172.18.0.1, localhost:4566"
+      ],
+      "x-localstack-edge": [
+        "http://localhost:4566"
+      ]
+    },
+    "body": "{\"prop\": \"value\"}",
+    "isBase64Encoded": false,
+    "httpMethod": "POST",
+    "queryStringParameters": {
+      "status": "PENDING",
+      "limit": "100"
+    },
+    "multiValueQueryStringParameters": {
+      "status": [
+        "PENDING"
+      ],
+      "limit": [
+        "100"
+      ]
+    },
+    "pathParameters": {
+      "productId": "abcd-1234"
+    },
+    "resource": "/products/{productId}/items",
+    "requestContext": {
+      "accountId": "000000000000",
+      "apiId": "rnwaeztfs1",
+      "resourcePath": "/products/{productId}/items",
+      "domainPrefix": "localhost",
+      "domainName": "localhost",
+      "resourceId": "2ucweyupcf",
+      "requestId": "53ed575e-6585-45e8-8f1c-c199a9f8a00a",
+      "identity": {
+        "accountId": "000000000000",
+        "sourceIp": "172.18.0.1",
+        "userAgent": "unirest-java/curl"
+      },
+      "httpMethod": "POST",
+      "protocol": "HTTP/1.1",
+      "requestTime": "27/Nov/2022:15:50:10 +0000",
+      "requestTimeEpoch": 1669564210834,
+      "authorizer": {},
+      "path": "/local/products/abcd-1234/items",
+      "stage": "local"
+    },
+    "stageVariables": {}
+  },
+  "env": {
+    "PATH": "/var/lang/bin:/usr/local/bin:/usr/bin/:/bin:/opt/bin",
+    "_AWS_XRAY_DAEMON_ADDRESS": "169.254.79.2",
+    "LAMBDA_TASK_ROOT": "/var/task",
+    "AWS_LAMBDA_FUNCTION_MEMORY_SIZE": "1536",
+    "TZ": ":UTC",
+    "AWS_SECRET_ACCESS_KEY": "test",
+    "AWS_DEFAULT_REGION": "us-east-1",
+    "AWS_EXECUTION_ENV": "AWS_Lambda_java11",
+    "_LAMBDA_SB_ID": "7",
+    "AWS_LAMBDA_LOG_GROUP_NAME": "/aws/lambda/LambdaRequestProxyHandler",
+    "AWS_LAMBDA_FUNCTION_INVOKED_ARN": "arn:aws:lambda:us-east-1:000000000000:function:LambdaRequestProxyHandler",
+    "_HANDLER": "com.wisetack.samples.LambdaRequestProxyHandler::handleRequest",
+    "LANG": "en_US.UTF-8",
+    "_LAMBDA_LOG_FD": "9",
+    "LAMBDA_RUNTIME_DIR": "/var/runtime",
+    "_LAMBDA_CONTROL_SOCKET": "14",
+    "AWS_ACCESS_KEY_ID": "test",
+    "LD_LIBRARY_PATH": "/var/lang/lib:/lib64:/usr/lib64:/var/runtime:/var/runtime/lib:/var/task:/var/task/lib:/opt/lib",
+    "_X_AMZN_TRACE_ID": "Root=1-dc99d00f-c079a84d433534434534ef0d;Parent=91ed514f1e5c03b2;Sampled=1",
+    "_LAMBDA_SHARED_MEM_FD": "11",
+    "AWS_SECRET_KEY": "test",
+    "AWS_LAMBDA_RUNTIME_API": "127.0.0.1:9001",
+    "AWS_REGION": "us-east-1",
+    "DOCKER_LAMBDA_USE_STDIN": "1",
+    "AWS_LAMBDA_FUNCTION_TIMEOUT": "900",
+    "AWS_LAMBDA_LOG_STREAM_NAME": "2022/11/27/[$LATEST]95f7fb1a7f4f3d511271aed1a7cabdc5",
+    "HOSTNAME": "f90c3d067f04",
+    "AWS_XRAY_DAEMON_ADDRESS": "169.254.79.2:2000",
+    "_AWS_XRAY_DAEMON_PORT": "2000",
+    "AWS_XRAY_CONTEXT_MISSING": "LOG_ERROR",
+    "EDGE_PORT": "4566",
+    "AWS_LAMBDA_FUNCTION_VERSION": "$LATEST",
+    "_LAMBDA_RUNTIME_LOAD_TIME": "1530232235231",
+    "AWS_ACCESS_KEY": "test",
+    "LOCALSTACK_HOSTNAME": "172.18.0.2",
+    "_LAMBDA_CONSOLE_SOCKET": "16",
+    "AWS_LAMBDA_FUNCTION_NAME": "LambdaRequestProxyHandler",
+    "HOME": "/home/sbx_user1051"
+  }
+}
+
+< HTTP/1.1 202
+< content-type: application/json
+< X-Wisetack-Token: Test-Wisetack-Token
+< Content-Length: 4379
+< Connection: close
+< date: Sun, 27 Nov 2022 15:50:13 GMT
+< server: hypercorn-h11

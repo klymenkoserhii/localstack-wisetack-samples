@@ -1,0 +1,95 @@
+openapi: 3.0.1
+
+info:
+  title: LocalStack Proxy API Test
+  version: 0.1.0
+
+components:
+  schemas:
+    TransactionRequest:
+      type: object
+    TransactionResponse:
+      type: object
+    Error:
+      type: object
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: x-api-key
+      in: header
+
+paths:
+  /products/{productId}/items:
+    post:
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionRequest'
+        required: true
+
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          required: false
+        - in: query
+          name: startingAfter
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: endingBefore
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: status
+          schema:
+            type: string
+          required: false
+
+      x-amazon-apigateway-integration:
+        uri: "${lambda-arn-LambdaRequestProxyHandler}"
+        credentials: "${api-role-arn}"
+        httpMethod: "POST"
+        type: "aws_proxy"
+
+        responses:
+          default:
+            statusCode: '200'
+          ".*httpStatus.*:400.*":
+            statusCode: '400'
+            responseTemplates:
+              application/json: "#set($errorMessage = $input.path('$.errorMessage'))\n $errorMessage"
+
+      x-amazon-apigateway-auth:
+        type: "NONE"
+
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TransactionResponse"
+        "202":
+          description: CREATED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TransactionResponse"
+        "400":
+          description: BAD REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
