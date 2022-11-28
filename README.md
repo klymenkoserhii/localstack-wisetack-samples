@@ -31,6 +31,8 @@ Before reproducing issues:
 
 ### 1. AWS Global Table Creation with Terraform Issue.
 
+([Issue](https://github.com/localstack/localstack/issues/6743) in LocalStack repo already created.)
+
 Steps to reproduce:
 
 ```shell
