@@ -73,9 +73,11 @@ required for terraform provider.
 
 ### 2. API Gateway Lambda Integration Discrepancies.
 
-The two possible API Gateway integrations for lambda are 'Lambda-Proxy' and 'Lambda'. 
+The two possible API Gateway integrations for lambda are 'Lambda-Proxy' (AWS-PROXY integration type) and 'Lambda' (AWS integration type).
 
-In this sample 'Lambda' custom integration used. This type of the integration offers more control 
+You can find more information about integration types [here](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-integration-types.html).
+
+In this sample non-proxy 'Lambda' custom integration used. This type of the integration offers more control 
 over transmission data. The request can be modified before it is sent to lambda and the 
 response can be modified after it is sent from lambda. This can be done by mapping templates 
 which transforms the payload, as per the user customisations. API Gateway uses Velocity
