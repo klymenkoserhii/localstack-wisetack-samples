@@ -312,7 +312,7 @@ You can find examples of API responses [here](./scripts/results/004).
 
 #### CONCLUSION
 
-We cannot start to use LocalStack in our project right now until points 2.2 and 2.3 are fixed 
+We cannot start to use LocalStack in our project right now until issues 2.2 and 2.3 are fixed 
 as we don't have workarounds for them or we need to switch from non-proxy custom integration
 to more simple proxy integration and update our Lambdas accordingly, 
 but this is not desirable as non-proxy custom integration is more powerful.
