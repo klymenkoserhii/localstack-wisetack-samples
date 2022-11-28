@@ -75,7 +75,7 @@ required for terraform provider.
 
 The two possible API Gateway integrations for lambda are 'Lambda-Proxy' and 'Lambda'. 
 
-In this sample 'Lambda' integration used. This type of the integration offers more control 
+In this sample 'Lambda' custom integration used. This type of the integration offers more control 
 over transmission data. The request can be modified before it is sent to lambda and the 
 response can be modified after it is sent from lambda. This can be done by mapping templates 
 which transforms the payload, as per the user customisations. API Gateway uses Velocity
@@ -254,18 +254,18 @@ for more details.
 I have not found a workaround for this drawback.
 I tried adding the responseOverride property to the $context object but that didn't work.
 
-Also, it looks like **$util.parseJson()** mapping template function does not implemented in LocalStack.
+Also, it looks like **$util.parseJson()** mapping template function not implemented in LocalStack.
 
 You can find response mapping templates source code here:
 - [Working AWS version](./terraform/002/response-template-aws.vm)
 - [Not working localStack version](./terraform/002/response-template-local.vm)
 
-At the moment it is not possible to override response headers and status codes when using API Gateway "Lambda" integration with LocalStack, 
+At the moment it is not possible to override response headers and status codes when using API Gateway "Lambda" custom integration with LocalStack, 
 but this is required in our project.
 
 #### 2.3 Mapping status codes to static values doesn't work.
 
-A status code can’t be passed directly from the Lambda function in a non-proxy integration. 
+A status code can’t be passed directly from the Lambda function in a non-proxy custom integration. 
 AWS recommends to use mapping templates or regular expressions to map the status codes.
 Please see documentation on this feature [here](https://aws.amazon.com/premiumsupport/knowledge-center/api-gateway-status-codes-rest-api/)
 
@@ -296,7 +296,7 @@ cd ./scripts
 ./004_invoke_post_api_with_error.sh
 ```
 
-In AWS Cloud 400 HTTP status code returned, but in LocalStack 200 returned.
+In AWS Cloud 400 HTTP status code returned, but in LocalStack 200 status code returned.
 
 You can find examples of API responses [here](./scripts/results/004).
 
@@ -308,5 +308,7 @@ You can find examples of API responses [here](./scripts/results/004).
 
 #### CONCLUSION
 
-We cannot start to use LocalStack in our project until points 2.2 and 2.3 are fixed 
-as we don't have workarounds for them.
+We cannot start to use LocalStack in our project right now until points 2.2 and 2.3 are fixed 
+as we don't have workarounds for them or we need to switch from non-proxy custom integration
+to more simple proxy integration and update our Lambdas accordingly, 
+but this is not desirable as non-proxy custom integration is more powerful.
