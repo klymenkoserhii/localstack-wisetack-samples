@@ -75,6 +75,8 @@ required for terraform provider.
 
 ### 2. API Gateway Lambda Integration Discrepancies.
 
+([Issue](https://github.com/localstack/localstack/issues/7252) in LocalStack repo created.)
+
 The two possible API Gateway integrations for lambda are 'Lambda-Proxy' (AWS-PROXY integration type) and 'Lambda' (AWS integration type).
 
 You can find more information about integration types [here](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-integration-types.html).
